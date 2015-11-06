@@ -1,0 +1,14 @@
+<?php
+// $Id: media_audio_flotsam.module,v 1.1 2010/09/20 11:12:22 alexua Exp $
+
+/**
+ *  @file
+ *  Container for Embedded Audio Field provider files that have yet to get spun off 
+ *  into their own Media Module.
+ */
+
+function media_audio_flotsam_emfield_providers($module, $provider = NULL) {
+  if ($module == 'emaudio') {
+    return drupal_system_listing("$provider\.inc$", drupal_get_path('module', 'media_audio_flotsam') ."/providers", 'name', 0);
+  }
+}

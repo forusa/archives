@@ -1,0 +1,532 @@
+/* ==========
+ * Nodes within groups
+ * ========== */
+
+.og-home-link-panel { /* link to group home page on nodes in that group */
+  background-color: #ddf;
+  margin-bottom: 1em;
+  padding: 1em;
+}
+
+.og-home-link-panel h2, .og-home-link-panel div { display: inline !important; }
+.og-home-link-panel a { font-weight: bold; }
+
+
+/*
+
+#og_node .pane-node-body { }
+#og_node .pane-node-body p { text-align: justify; margin: 1em 0; }
+
+#og_node .pane-node-body p { font-size: 1em; }
+
+#og_node .pane-node-body a, #og_node .pane-node-body a:link, #og_node .pane-node-body a:visited { text-decoration: underline; }
+
+#og_node .pane-node-body a:active, #og_node .pane-node-body a:hover { text-decoration: none; background-color: #054b81; color: #fff; }
+
+#og_node .pane-node-body ul, #og_node .pane-node-body ol {
+  margin: 1em 0 1em 2em;
+  font-size: 1em;
+  line-height: 1.65em;
+}
+
+#og_node .pane-node-body li { margin: 1em 0; }
+
+*/
+
+/* ==========
+ * Organic Groups (campaigns, services, local chapters, etc.)
+ * ========== */
+
+/* Join */
+
+.pane-block-14 .item-list ul li {
+  background-image: none;
+  margin: 0;
+  padding: 0;
+}
+
+.pane-block-14 .item-list ul li a, .pane-block-14 .item-list ul li a:link, .pane-block-14 .item-list ul li a:visited {
+  display: block;
+  background-color: #054b81;
+  font-size: 2.35em;
+  line-height: 1.25em;
+  padding: 5px;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-family: georgia, 'times new roman', times, serif;
+  color: #fff;
+  text-align: center;
+  border-top: 2px #aaa solid;
+  border-left: 2px #aaa solid;
+  border-right: 2px #444 solid;
+  border-bottom: 2px #444 solid;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+}
+
+.pane-block-14 .item-list ul li a:hover {
+  background-color: #005a8c;
+  text-decoration: none;
+}
+
+.pane-block-14 .item-list ul li a:active {
+  background-color: #005a8c;
+  text-decoration: none;
+  border-top-color: #444;
+  border-left-color: #444;
+  border-right-color: #aaa;
+  border-bottom-color: #aaa;
+}
+
+  /* "Login first" join link */
+
+.pane-block-14 .item-list ul li a.og-join-login {
+}
+
+.pane-block-14 .item-list ul li a.og-join-login:hover, .pane-block-14 .item-list ul li a.og-join-login:active {
+}
+
+  /* "Register first" join link */
+
+.pane-block-14 .item-list ul li a.og-join-register {
+}
+
+.pane-block-14 .item-list ul li a.og-join-register:hover, .pane-block-14 .item-list ul li a.og-join-register:active {
+}
+
+  /* "My membership" for already joined */
+
+.pane-block-14 .item-list ul li a.og-join-subscribed {
+  font-size: 1.15em;
+  line-height: 1.2;
+  background-color: #444;
+}
+
+.pane-block-14 .item-list ul li a.og-join-subscribed:hover, .pane-block-14 .item-list ul li a.og-join-subscribed:active {
+  background-color: #777;
+}
+
+  /* "Cancel request" for pending membership */
+
+.pane-block-14 .item-list ul li a.og-join-pending {
+  font-size: 1.15em;
+  line-height: 1.2;
+  background-color: #444;
+}
+
+.pane-block-14 .item-list ul li a.og-join-pending:hover, .pane-block-14 .item-list ul li a.og-join-pending:active {
+  background-color: #777;
+}
+
+/* Donate */
+
+.field-field-group-link-donation a, .field-field-group-link-donation a:link, .field-field-group-link-donation a:visited {
+  display: block;
+  background-color: #cc0066;
+  font-size: 2.35em;
+  line-height: 1.25em;
+  padding: 5px;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-family: georgia, 'times new roman', times, serif;
+  color: #fff;
+  text-align: center;
+  border-top: 2px #aaa solid;
+  border-left: 2px #aaa solid;
+  border-right: 2px #444 solid;
+  border-bottom: 2px #444 solid;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+}
+
+.field-field-group-link-donation a:hover {
+  background-color: #de0078;
+  text-decoration: none;
+}
+
+.field-field-group-link-donation a:active {
+  background-color: #de0078;
+  text-decoration: none;
+  border-top-color: #444;
+  border-left-color: #444;
+  border-right-color: #aaa;
+  border-bottom-color: #aaa;
+}
+
+/* Sidebar Navigation */
+
+.pane-og-group-pages-panel-pane-2 h2.pane-title {
+  margin-top: 0 !important;
+  border-bottom: 1px #666 solid;
+}
+
+.pane-og-group-pages-panel-pane-2 .item-list ul li {
+  margin: 1em 0 2em 0;
+  font-size: 125% !important;
+  line-height: 1.1 !important;
+}
+
+.pane-og-group-pages-panel-pane-2 .item-list ul li a:hover, .pane-og-group-pages-panel-pane-2 .item-list ul li a:active { background-color: #054B81; color: #fff; }
+
+/* RSS & Social Networking */
+/* (Facebook "like" button formatting is site-wide in forusa-style.css) */
+
+.pane-block-15, .pane-block-25 { padding: 1.5em 0 0 6px; }
+.pane-block-15 .ext, .pane-block-25 .ext { display: none; /* Hides presentational "external link" cues */ }
+.pane-block-15 .addthis_toolbox { display: inline; }
+.pane-block-15 .addthis_toolbox .at300m { /* "Save & Share" */ 
+  width: 0; height: 0; overflow: hidden; padding: 0 !important;
+  /* display: block; float: none !important; margin-top: 1em; padding-bottom: 4px; font-weight: bold; */ }
+.pane-block-15 .addthis_toolbox .at15t_compact { display: none; }
+.pane-block-15 .addthis_toolbox .addthis_button_compact { padding: 8px 16px 0 0; float: left; clear: right; }
+.pane-block-15 .addthis_toolbox .addthis_separator, .pane-block-25 .addthis_toolbox .addthis_separator { display: none; }
+.pane-block-15 .addthis_toolbox span.at300bs { float: left; padding: 0 4px; margin: 4px 0; }
+
+.pane-block-15 a.group-rss, .pane-block-25 a.group-rss {
+  background: url("//s7.addthis.com/static/r07/widget22_32x32.png") no-repeat scroll 0 0 transparent;
+  background-position: 0 -7744px;
+  height: 0;
+  padding: 32px 0 0 0;
+  margin: 0 2px 4px 0;
+  overflow: hidden;
+  width: 32px;
+  float: left;
+}
+
+/* Group Location Map */
+
+.pane-map-view-panel-pane-4 .openlayers-views-map {
+  margin: 1.5em 0 1em 0;
+  border: 1px solid #A3A3A3;
+}
+
+/* (Old) Location */
+
+#og_homepage .pane-location-pane .views-field-address {
+  margin: 2em 0;
+  padding: 0.75em;
+  border: 1px #999 solid;
+  font-style: italic;
+  text-align: center;
+}
+
+#og_homepage .pane-location-pane .views-field-address .locality { padding-left: 0.25em; }
+
+#og_homepage .pane-location-pane .views-field-address .map-link { margin: 0.75em 0 0 0; font-size: 0.8em; font-weight: bold; color: #666; }
+
+#og_homepage .pane-location-pane .views-field-address .map-link a:hover, #og_homepage .pane-location-pane .views-field-address .map-link a:active { text-decoration: underline; }
+
+#og_homepage .pane-location-pane .views-field-phone {
+  margin: 2em 0;
+  padding: 0.75em;
+  border: 1px #999 solid;
+  font-style: italic;
+  text-align: center;
+  font-weight: bold;
+}
+
+/* Location description (city and state) */
+
+.pane-field-group-address-city {
+  float: left;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-right: 1px #444 solid;
+  font-size: 110%;
+  font-weight: bold;
+}
+
+.pane-field-group-address-state {
+  float: left;
+  padding-left: 5px;
+  padding-bottom: 1em;
+  font-size: 110%;
+  font-weight: bold;
+}
+
+/* Website */
+
+.pane-field-group-website {
+  clear: left;  
+  margin-top: 1em;
+}
+
+.field-field-group-website {
+  text-align: center;
+  border-top: 1px solid #999;
+  border-bottom: 1px solid #999;
+  margin: 1em 0;
+  padding: 0.75em 0;
+}
+
+.field-field-group-website a { font-weight: bold; }
+
+/* Additional Contact Information (phone, email, etc.) */
+
+.pane-field-group-contact {
+  clear: left;
+  text-align: center;
+  border-bottom: 1px solid #999;
+  margin: 1em 0;
+  padding: 0.75em 0;
+}
+
+.pane-field-group-contact h2.pane-title {
+  margin-bottom: 0 !important;
+  font-weight: bold !important;
+  font-size: 1em !important;
+  font-family: "Lucida Grande","Lucida Sans Unicode",helvetica,verdana,arial,sans-serif !important;
+  text-align: center !important;
+}
+
+.pane-field-group-contact a { font-weight: bold; }
+
+/* Group Footer */
+
+.field-field-group-footer {
+  clear: left;
+  margin: 1em 0;
+  padding: 1em 1em 0.5em 1em;
+  font-size: 0.9em;
+  background-color: #ddf;
+}
+
+/* Headline */
+
+.field-field-group-headline {
+  font-size: 1.75em;
+  line-height: 1.1;
+  margin: 0.5em 0 1em 0;
+  font-family: helvetica, geneva, sans-serif;
+  letter-spacing: -1px;
+}
+
+.field-field-group-headline a {
+  font-weight: bold;
+  font-family: tahoma, helvetica, verdana, geneva, sans-serif;
+  padding: 0 0.25em;
+}
+
+.field-field-group-headline a:hover, .field-field-group-headline a:active {
+  text-decoration: underline;
+  color: #003469;
+}
+
+/* Featured Text (Body/Mission) */
+
+.pane-og-mission {
+  margin: 1em 0;
+  background-color: #ddf;
+  padding: 1em 1.25em 0.5em 1.25em;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  border: 1px #003469 solid;
+}
+
+.pane-node-body { padding-top: 0; padding-bottom: 0; /* P elements have margins that take care of this */ }
+
+.og-mission {
+  font-size: 1.1em;
+  line-height: 1.5;
+  font-family: georgia, 'times new roman', times, serif;
+  text-align: left;
+  font-style: normal;
+  font-weight: normal;
+  color: #666;
+  background-color: transparent;
+  margin: 0;
+  padding: 0;
+}
+
+.og-mission a { font-weight: bold; }
+.og-mission a:hover, .og-mission a:active { text-decoration: underline; color: #003469; }
+
+.og-mission ul, .og-mission ol { padding-left: 2em; }
+
+/* Our Goals (Description) */
+
+#og_homepage .ctools-collapsible-container {
+  margin: 1em 0;
+  padding-top: 0.5em;
+  border-top: 3px #dedffe solid;
+}
+
+#og_homepage .ctools-collapsible-container h2 {
+  font-size: 1.25em;
+  line-height: 1.25em;
+  font-weight: bold;
+}
+
+#og_homepage .ctools-collapsible-container .ctools-collapsible-content {
+  margin: 1em 0;
+  padding: 0 1em;
+  font-size: 1.1em;
+  line-height: 1.1;
+  font-style: italic;
+}
+
+/* Create Content (Groups Admin) */
+
+#og_homepage .ctools-collapsible-container .ctools-collapsible-content .item-list {
+  font-size: 0.9em;
+  font-style: normal !important;
+}
+
+/* Aggregated Group Feeds */
+
+.og_aggregator_add a {
+  display: block;
+  margin: 1em auto;
+  padding: 1em;
+  background-color: #fff;
+  font-weight: bold;
+  color: #054B81;
+  border: 1px #054B81 solid;
+  text-align: center;
+}
+
+.og_aggregator_add a:hover, .og_aggregator_add a:active {
+  color: #fff;
+  background-color: #054B81;
+  text-decoration: none;
+}
+
+.og-aggregator-more {
+  font-size: 0.9em;
+  font-weight: bold;
+  color: #999;
+  font-family: tahoma, helvetica, verdana, geneva, sans-serif;
+}
+
+/* ==========
+ * All Groups listing (/og, /og/all view)
+ * ========== */
+
+.page-og .view-id-og table.views-table caption {
+  font-size: 1.6em;
+  font-weight: bold;
+  text-align: left;
+  margin-bottom: 0.5em;
+  font-style: italic;
+  font-family: helvetica, tahoma, geneva, sans-serif;
+  letter-spacing: -1px;
+}
+
+/* ==========
+ * Old Groups (some items are used in new groups)
+ * ========== */
+ 
+.og-picture-wrapper {
+  border-bottom:1px dotted;
+  padding:5px 0px;
+  text-align:center;
+}
+
+.og-picture-wrapper .picture {
+  float: none;
+}
+
+#block-og-5 div.item-list ul { padding: 0; margin: 0;  }
+#block-og-5 div.item-list ul ul li {margin:0}
+
+/* recent posts pane */
+
+.pane-og-all-posts .views-row {
+  margin: 0 0 2em 0;
+}
+
+.pane-og-all-posts .views-field-title {
+  font-weight: bold;
+  font-size: 1.15em;
+  border-bottom: 1px #006 dotted;
+}
+
+.pane-og-all-posts .views-field-title a { text-decoration: none !important; }
+.pane-og-all-posts .views-field-title a:hover, .pane-og-all-posts .views-field-title a:active { text-decoration: underline !important; }
+
+.pane-og-all-posts .views-field-teaser {
+  margin: 1em 0;
+  font-size: 1em;
+  line-height: 1.5 !important;
+}
+
+  /* negates P tag styles since some teasers lack it */
+.pane-og-all-posts .views-field-teaser p { display: inline !important; margin: 0 !important; line-height: 1 !important; }
+  /* hides embedded images in teasers */
+.pane-og-all-posts .views-field-teaser img { display: none !important; }
+
+.pane-og-all-posts .views-field-name, .pane-og-all-posts .views-field-created {
+  font-size: 0.9em;
+  color: #999;
+  font-weight: bold;
+  font-family: tahoma, helvetica, verdana, geneva, sans-serif;
+}
+
+/* upcoming events pane */
+
+.pane-calendar-groups .view-id-calendar_groups .views-row { margin: 0 0 1.5em 0; }
+
+.pane-calendar-groups .view-id-calendar_groups .views-field-field-representative-image-fid {
+  width: 24px;
+  float: right;
+  margin: 0 0 5px 5px;
+}
+
+.pane-calendar-groups .view-id-calendar_groups .views-field-title { font-weight: bold; }
+
+.pane-calendar-groups .view-id-calendar_groups .views-field-field-date-value {
+  display: block;
+  margin-top: 0.5em;
+  font-family: tahoma, helvetica, verdana, geneva, sans-serif;
+  font-weight: bold;
+  color: #999;
+}
+
+/*tighter search button on group details block*/
+#block-og-0 .form-item {
+  margin-bottom: .4em;
+}
+
+/*no link on group title in group details block*/
+#block-og-0 h2 a {
+  text-decoration:none;
+}
+
+/*used in node-og-group-post.tpl.php*/
+.groups .links  {
+  display: inline;
+}
+
+.view-id-og_members_faces table td, .view-id-og_members_block {
+  text-align: center;
+  vertical-align: bottom;
+}
+
+.view-id-og_members_block .item-list ul li {
+	border-top: #CCCCCC 1px dotted;
+	padding-top: 4px;
+	list-style: none;
+	background: none;
+	margin-left: 0;
+	padding-left: 0em;
+	text-indent: -1em;
+}
+
+.view-id-og_members_faces tr.row-first td, .view-id-og_members_block ul li:first-child {
+  border-top: none;
+}
+
+.view-id-og_members_faces div.picture, .view-id-og_members_block div.picture {
+  float: none;
+}
+
+.views-field-is-admin {
+  font-style: italic;
+}
+
+
+
+

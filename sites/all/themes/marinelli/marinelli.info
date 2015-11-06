@@ -1,0 +1,28 @@
+; $Id: marinelli.info,v 1.3 2008/09/18 21:28:29 lioz Exp $
+
+name = Marinelli
+
+description = A fresh 3-column layout for Drupal. Still usable over 4000m!
+
+
+core = 6.x
+
+engine = phptemplate
+
+stylesheets[all][] = layout.css
+stylesheets[all][] = graphics.css
+stylesheets[all][] = typography.css
+stylesheets[all][] = links.css
+
+
+
+
+
+
+
+; Information added by drupal.org packaging script on 2009-08-25
+version = "6.x-2.96"
+core = "6.x"
+project = "marinelli"
+datestamp = "1251185475"
+

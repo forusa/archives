@@ -1,0 +1,13 @@
+name = "IMCE for File Field"
+description = "Allows users to select files from IMCE File Browser for file fields."
+dependencies[] = "filefield"
+dependencies[] = "imce"
+core = "6.x"
+
+
+; Information added by Drupal.org packaging script on 2013-12-17
+version = "6.x-1.0"
+core = "6.x"
+project = "imce_filefield"
+datestamp = "1387303105"
+

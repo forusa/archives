@@ -1,0 +1,20 @@
+
+OG username helper x.x-x.x, xxxx-xx-xx
+--------------------------------------
+
+OG username helper 6.x-1.x, xxxx-xx-xx
+--------------------------------------
+
+OG username helper 6.x-1.1, 2010-07-07
+--------------------------------------
+minor: use asciidoc for README
+feature #719344 by marvil07 | karlkeefer: Added Realname module
+  integration.
+
+OG username helper 6.x-1.0, 2010-01-28
+--------------------------------------
+by marvil07, Salimane Adjao Moustapha: Initial revision from the
+  original OG issue http://drupal.org/node/225308#comment-2331312
+by marvil07: react also on click event and BTW generalize a little
+  the js
+

@@ -1,0 +1,11 @@
+name = Unitag
+description = Add synonym, related terms and other features to free-tagging fields.
+core = 6.x
+dependencies[] = taxonomy
+
+; Information added by drupal.org packaging script on 2012-04-07
+version = "6.x-1.0-beta4"
+core = "6.x"
+project = "unitag"
+datestamp = "1333822574"
+

@@ -1,0 +1,797 @@
+<?php
+// $Id: cck_fullname.module,v 1.10.2.1 2010/09/15 02:04:31 rconstantine Exp $
+
+/**
+ * @file
+ * This is a Drupal Module - CCK Full Name
+ * It implements a Full Name field for CCK
+ *
+ * Copyright 2010 Ryan Constantine, Neighborforge
+ *
+ * Licensed under the GNU Public License
+ */
+
+
+/**
+ * Implementation of CCK's hook_field_info().
+ *
+ * Returns basic information about this CCK field.
+ */
+function cck_fullname_field_info() {
+  return array(
+    'cck_fullname' => array(
+      'label' => t('Full name'),
+      'description' => t('Multiple fields to store a full name.'),
+    )
+  );
+}
+
+/**
+ * Implementation of CCK hook_field_settings().
+ */
+function cck_fullname_field_settings($op, $field) {
+  switch ($op) {
+    case 'form':
+      $form = array();
+
+      //borrowed from namefield module
+      //----------allow content type creator to determine which fields are required-----------
+      $required_default = array();
+      if (is_array($field['required_parts'])) {
+        foreach ($field['required_parts'] as $part => $required) {
+          if ($required) {
+            $required_default[] = $part;
+          }
+        } // foreach possibly-required part
+      }
+      else {
+        $required_default = array('first', 'last');
+      } // if we can make up our own defaults
+
+      $form['is_required'] = array(
+        '#type' => 'fieldset',
+        '#weight' => 3,
+        '#collapsible' => TRUE,
+        '#collapsed' => FALSE,
+        '#title' => t("Required Parts"),
+      );
+      $form['is_required']['required_parts'] = array(
+        '#type' => 'checkboxes',
+        '#title' => t("Required Parts"),
+        '#description' => t("Choose which of these components should be required.
+        Only applies if you chose the field in the above section, either <strong>Required</strong>,
+        or <strong>Optional</strong>."),
+        '#default_value' => $required_default,
+        '#options' => array(
+          'prefix' => t("Prefix"),
+          'first'  => t("First"),
+          'middle' => t("Middle"),
+          'last'   => t("Last"),
+          'suffix' => t("Suffix"),
+        ),
+      );
+
+      //----------allow content type creator to determine which legal name fields to use-----------
+      $legal_default = array();
+      if (is_array($field['legalname'])) {
+        foreach ($field['legalname'] as $part => $legal) {
+          if ($legal) {
+            $legal_default[] = $part;
+          }
+        } // foreach possibly-legal part
+      }
+      else {
+        $legal_default = array('first', 'middle', 'last');
+      } // if we can make up our own default
+
+      $form['legal_name'] = array(
+        '#type' => 'fieldset',
+        '#weight' => 2,
+        '#collapsible' => TRUE,
+        '#collapsed' => FALSE,
+        '#title' => t('Available Parts'),
+      );
+      $form['legal_name']['legalname'] = array(
+        '#type' => 'checkboxes',
+        '#title' => t('Available Parts'),
+        '#description' => t("Check which of these fields should be available on your forms."),
+        '#required' => TRUE,
+        '#default_value' => $legal_default,
+        '#options' => array(
+          'prefix' => t("Prefix"),
+          'first'  => t("First"),
+          'middle' => t("Middle"),
+          'last'   => t("Last"),
+          'suffix' => t("Suffix"),
+        ),
+      );
+      //end borrowed section
+
+      $form['middle_initial'] = array(//TODO remove this because with the ability to specify the field length, this is redundant
+        '#type' => 'checkbox',
+        '#title' => t('Use middle initial only?'),
+        '#default_value' => isset($field['middle_initial']) ? $field['middle_initial'] : 1,
+        '#return_value' => 1,
+        '#description' => t('Do you want to store only middle initials? This is not simply a display option and should be set only once. Changing it has unpredictable results.'),
+      );
+
+      //-------------specify maximum lengths for each field------------------------
+      $form['max_lengths_legal'] = array(
+        '#type' => 'fieldset',
+        '#weight' => 4,
+        '#title' => t('Full name maximum field lengths'),
+        '#collapsible' => TRUE,
+        '#collapsed' => FALSE,
+      );
+      $form['max_lengths_legal']['max_length_prefix_legal'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Prefix maximum length'),
+        '#size' => 1,
+        '#default_value' => isset($field['max_length_prefix_legal']) ? $field['max_length_prefix_legal'] : '',
+        '#required' => FALSE,
+        '#description' => t('The maximum length of the field in characters. Leave blank for an unlimited size.'),
+      );
+      $form['max_lengths_legal']['max_length_first_legal'] = array(
+        '#type' => 'textfield',
+        '#title' => t('First name maximum length'),
+        '#size' => 6,
+        '#default_value' => isset($field['max_length_first_legal']) ? $field['max_length_first_legal'] : '',
+        '#required' => FALSE,
+        '#description' => t('The maximum length of the field in characters. Leave blank for an unlimited size.'),
+      );
+      $form['max_lengths_legal']['max_length_middle_legal'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Middle name maximum length'),
+        '#size' => 6,
+        '#required' => FALSE,
+        '#description' => t('The maximum length of the field in characters (unless Middle Initial is used instead). Leave blank for an unlimited size.'),
+      );
+      if ($field['middle_initial'] == 1) {
+        $form['max_lengths_legal']['max_length_middle_legal']['#default_value'] = 1;
+      }
+      else {
+        $form['max_lengths_legal']['max_length_middle_legal']['#default_value'] = isset($field['max_length_middle_legal']) ? $field['max_length_middle_legal'] : '';
+      }
+      $form['max_lengths_legal']['max_length_last_legal'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Last name maximum length'),
+        '#size' => 6,
+        '#default_value' => isset($field['max_length_last_legal']) ? $field['max_length_last_legal'] : '',
+        '#required' => FALSE,
+        '#description' => t('The maximum length of the field in characters. Leave blank for an unlimited size.'),
+      );
+      $form['max_lengths_legal']['max_length_suffix_legal'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Suffix maximum length'),
+        '#size' => 1,
+        '#default_value' => isset($field['max_length_suffix_legal']) ? $field['max_length_suffix_legal'] : '',
+        '#required' => FALSE,
+        '#description' => t('The maximum length of the field in characters. Leave blank for an unlimited size.'),
+      );
+
+      return $form;
+    
+    case 'save':
+      return array(
+        'required_parts',
+        'legalname',
+        'middle_initial',
+        'max_length_prefix_legal',
+        'max_length_first_legal',
+        'max_length_middle_legal',
+        'max_length_last_legal',
+        'max_length_suffix_legal',
+      );
+
+    case 'database columns':
+      $columns['last'] = array('type' => 'varchar', 'length' => 30, 'not null' => FALSE, 'sortable' => TRUE, 'default' => '', 'views' => TRUE);
+      if (!empty($field['max_length_last_legal']) && $field['max_length_last_legal'] <= 255) {
+        $columns['last']['length'] = $field['max_length_last_legal'];
+      }
+      else {
+        unset($columns['last']['length']);
+        $columns['last']['type'] = 'text';
+        $columns['last']['size'] = 'big';
+      }
+
+      $columns['first'] = array('type' => 'varchar', 'length' => 30, 'not null' => FALSE, 'sortable' => TRUE, 'default' => '', 'views' => TRUE);
+      if (!empty($field['max_length_first_legal']) && $field['max_length_first_legal'] <= 255) {
+        $columns['first']['length'] = $field['max_length_first_legal'];
+      }
+      else {
+        unset($columns['first']['length']);
+        $columns['first']['type'] = 'text';
+        $columns['first']['size'] = 'big';
+      }
+
+      $columns['middle'] = array('type' => 'varchar', 'length' => 30, 'not null' => FALSE, 'sortable' => TRUE, 'default' => '', 'views' => TRUE);
+      if (!empty($field['max_length_middle_legal']) && $field['max_length_middle_legal'] <= 255) {
+        $columns['middle']['length'] = $field['max_length_middle_legal'];
+      }
+      else {
+        unset($columns['middle']['length']);
+        $columns['middle']['type'] = 'text';
+        $columns['middle']['size'] = 'big';
+      }
+
+      $columns['prefix'] = array('type' => 'varchar', 'length' => 30, 'not null' => FALSE, 'sortable' => TRUE, 'default' => '', 'views' => TRUE);
+      if (!empty($field['max_length_prefix_legal']) && $field['max_length_prefix_legal'] <= 255) {
+        $columns['prefix']['length'] = $field['max_length_prefix_legal'];
+      }
+      else {
+        unset($columns['prefix']['length']);
+        $columns['prefix']['type'] = 'text';
+        $columns['prefix']['size'] = 'big';
+      }
+      
+      $columns['suffix'] = array('type' => 'varchar', 'length' => 30, 'not null' => FALSE, 'sortable' => TRUE, 'default' => '', 'views' => TRUE);
+      if (!empty($field['max_length_suffix_legal']) && $field['max_length_suffix_legal'] <= 255) {
+        $columns['suffix']['length'] = $field['max_length_suffix_legal'];
+      }
+      else {
+        unset($columns['suffix']['length']);
+        $columns['suffix']['type'] = 'text';
+        $columns['suffix']['size'] = 'big';
+      }
+      return $columns;
+
+      case 'views data':
+        $data = content_views_field_views_data($field);
+        $db_info = content_database_info($field);
+        $table_alias = content_views_tablename($field);
+        return $data;
+  }
+}
+
+/**
+ * Implementation of CCK hook_field().
+ */
+function cck_fullname_field($op, &$node, $field, &$items, $teaser, $page) {
+  switch ($op) {
+    case 'sanitize':
+      foreach ($items as $delta => $item) {
+        foreach ($item as $col => $dat) {
+          $items[$delta]['safe_' . $col ] = check_plain($item[ $col ]);
+        }
+      }
+      break;
+  }
+}
+
+/**
+ * Implementation of hook_content_is_empty().
+ */
+function cck_fullname_content_is_empty($item, $field) {
+  if (empty($item['last']) && empty($item['first'])) {
+    return TRUE;
+  }
+  return FALSE;
+}
+
+/**
+ * Implementation of hook_widget_info().
+ */
+function cck_fullname_widget_info() {
+  return array(
+    'cck_fullname' => array(
+      'label' => t('Text fields'),
+      'field types' => array('cck_fullname'),
+      'multiple values' => CONTENT_HANDLE_CORE,
+      'callbacks' => array(
+        'default value' => CONTENT_CALLBACK_DEFAULT,
+      ),
+    ),
+  );
+}
+
+/**
+ * Implementation of Form API's hook_elements().
+ *
+ * Returns a skeleton Form API array that defines callbacks
+ * for the widget form.
+ */
+function cck_fullname_elements() {
+  $elements = array('cck_fullname' =>
+    array(
+      '#input' => TRUE,
+      '#process' => array('cck_fullname_person_entry_process'),
+    ),
+  );
+
+  return $elements;
+}
+
+/**
+ * Process callback for widget
+ *
+ * Returns a Forms API array that defines the widget's editing form.
+ */
+function cck_fullname_person_entry_process($element, $edit, &$form_state, $form) {
+  $defaults = $element['#value'];
+  $field = content_fields($element['#field_name'], $element['#type_name']);
+
+  if (!empty($field['legalname']['prefix'])) {
+    $element['prefix'] = array(
+      '#title' => t('Prefix'),
+      '#type' => 'textfield',
+      '#default_value' => isset($defaults['prefix']) ? $defaults['prefix'] : '',
+      '#size' => $field['max_length_prefix_legal'] ? $field['max_length_prefix_legal'] : NULL,
+      '#maxlength' => $field['max_length_prefix_legal'] ? $field['max_length_prefix_legal'] : NULL,
+      '#weight' => 2,
+      '#attributes' => isset($field['max_length_prefix_legal']) ? array('class' => 'cck_fullname_prefix', 'style' => "width:". $field['max_length_prefix_legal']*0.7 ."em;") : array('class' => 'cck_fullname_prefix'),
+      '#prefix' => '<div class="cck_fullname_prefix_wrapper">',
+      '#suffix' => '</div>',
+    );
+    if ($field['required_parts']['prefix'] === 'prefix' && arg(0) != 'admin') {
+      $element['prefix']['#is_required'] = TRUE;
+      $element['prefix']['#element_validate'][] = 'cck_fullname_field_element_validate';
+      $element['prefix']['#theme'] = 'cck_fullname_textfield';
+    }
+  }
+
+  if (!empty($field['legalname']['first'])) {
+    $element['first'] = array(
+      '#title' => t('First'),
+      '#type' => 'textfield',
+      '#default_value' => !empty($defaults['first']) ? $defaults['first'] : '',
+      '#size' => $field['max_length_first_legal'] ? $field['max_length_first_legal'] : NULL,
+      '#maxlength' => $field['max_length_first_legal'] ? $field['max_length_first_legal'] : NULL,
+      '#weight' => 3,
+      '#attributes' => !empty($field['max_length_first_legal']) ? array('class' => 'cck_fullname_first', 'style' => "width:". $field['max_length_first_legal']*0.7 ."em;") : array('class' => 'cck_fullname_first'),
+      '#prefix' => '<div class="cck_fullname_first_wrapper">',
+      '#suffix' => '</div>',
+    );
+    if ($field['required_parts']['first'] === 'first' && arg(0) != 'admin') {
+      $element['first']['#is_required'] = TRUE;
+      $element['first']['#element_validate'][] = 'cck_fullname_field_element_validate';
+      $element['first']['#theme'] = 'cck_fullname_textfield';
+    }
+  }
+
+  if (!empty($field['legalname']['middle'])) {
+    $element['middle'] = array(
+      '#title' => (isset($field['middle_initial']) && $field['middle_initial'] != 1) ? t('Middle') : t('M.I.'),
+      '#type' => 'textfield',
+      '#default_value' => !empty($defaults['middle']) ? $defaults['middle'] : '',
+      '#size' => (!empty($field['max_length_middle_legal']) && $field['middle_initial'] != 1) ? $field['max_length_middle_legal'] : (!empty($field['middle_initial']) && $field['middle_initial'] == 1 ? 1 : 25),
+      '#maxlength' => (!empty($field['max_length_middle_legal']) && $field['middle_initial'] != 1) ? $field['max_length_middle_legal'] : (!empty($field['middle_initial']) && $field['middle_initial'] == 1 ? 1 : 25),
+      '#weight' => 4,
+      '#attributes' => (!empty($field['max_length_middle_legal']) && $field['middle_initial'] != 1) ? array('class' => 'cck_fullname_middle', 'style' => "width:". $field['max_length_middle_legal']*0.7 ."em;") : (!empty($field['middle_initial']) && $field['middle_initial'] == 1 ? array('class' => 'cck_fullname_middle', 'style' => "width: 1em;") : 25),
+      '#prefix' => '<div class="cck_fullname_middle_wrapper">',
+      '#suffix' => '</div>',
+    );
+    if ($field['required_parts']['middle'] === 'middle' && arg(0) != 'admin') {
+      $element['middle']['#is_required'] = TRUE;
+      $element['middle']['#element_validate'][] = 'cck_fullname_field_element_validate';
+      $element['middle']['#theme'] = 'cck_fullname_textfield';
+    }
+  }
+
+  if (!empty($field['legalname']['last'])) {
+    $element['last'] = array(
+      '#title' => t('Last'),
+      '#type' => 'textfield',
+      '#default_value' => !empty($defaults['last']) ? $defaults['last'] : '',
+      '#size' => $field['max_length_last_legal'] ? $field['max_length_last_legal'] : NULL,
+      '#maxlength' => $field['max_length_last_legal'] ? $field['max_length_last_legal'] : NULL,
+      '#weight' => 5,
+      '#attributes' => !empty($field['max_length_last_legal']) ? array('class' => 'cck_fullname_last', 'style' => "width:". $field['max_length_last_legal']*0.7 ."em;") : array('class' => 'cck_fullname_last'),
+      '#prefix' => '<div class="cck_fullname_last_wrapper">',
+      '#suffix' => '</div>',
+    );
+    if ($field['required_parts']['last'] === 'last' && arg(0) != 'admin') {
+      $element['last']['#is_required'] = TRUE;
+      $element['last']['#element_validate'][] = 'cck_fullname_field_element_validate';
+      $element['last']['#theme'] = 'cck_fullname_textfield';
+    }
+  }
+
+  if (!empty($field['legalname']['suffix'])) {
+    $element['suffix'] = array(
+      '#title' => t('Suffix'),
+      '#type' => 'textfield',
+      '#default_value' => !empty($defaults['suffix']) ? $defaults['suffix'] : '',
+      '#size' => $field['max_length_suffix_legal'] ? $field['max_length_suffix_legal'] : NULL,
+      '#maxlength' => $field['max_length_suffix_legal'] ? $field['max_length_suffix_legal'] : NULL,
+      '#weight' => 6,
+      '#attributes' => !empty($field['max_length_suffix_legal']) ? array('class' => 'cck_fullname_suffix', 'style' => "width:". $field['max_length_suffix_legal']*0.7 ."em;") : array('class' => 'cck_fullname_suffix'),
+      '#prefix' => '<div class="cck_fullname_suffix_wrapper">',
+      '#suffix' => '</div>',
+    );
+    if ($field['required_parts']['suffix'] === 'suffix' && arg(0) != 'admin') {
+      $element['suffix']['#is_required'] = TRUE;
+      $element['suffix']['#element_validate'][] = 'cck_fullname_field_element_validate';
+      $element['suffix']['#theme'] = 'cck_fullname_textfield';
+    }
+  }
+
+  return $element;
+}
+
+function cck_fullname_field_element_validate($element, &$form_state) {
+  $field_delta = $element['#array_parents'][1];
+  $field_name = $element['#array_parents'][0];
+  $first = $element['#post'][$field_name][$field_delta]['first'];
+  $last = $element['#post'][$field_name][$field_delta]['last'];
+  if (!empty($last) || !empty($first)) {
+    if ($element['#is_required'] && (!count($element['#value']) || (is_string($element['#value']) && strlen(trim($element['#value'])) == 0))) {
+      form_error($element, t('!name field is required.', array('!name' => $element['#title'])));
+    }
+  }
+}
+
+/**
+ * Implementation of hook_theme().
+ */
+function cck_fullname_theme() {
+  return array(
+    'cck_fullname' => array(
+      'arguments' => array('element' => NULL),
+    ),
+    'cck_fullname_formatter_default' => array(
+      'arguments' => array('element' => NULL),
+    ),
+    'cck_fullname_formatter_lno' => array(
+      'arguments' => array('element' => NULL),
+    ),
+    'cck_fullname_formatter_fno' => array(
+      'arguments' => array('element' => NULL),
+    ),
+    'cck_fullname_formatter_lnfs' => array(
+      'arguments' => array('element' => NULL),
+    ),
+    'cck_fullname_formatter_lnfl' => array(
+      'arguments' => array('element' => NULL),
+    ),
+    'cck_fullname_form_element' => array(
+      'arguments' => array('element' => NULL),
+    ),
+    'cck_fullname_textfield' => array(
+      'arguments' => array('element' => NULL),
+    ),
+  );
+}
+
+/**
+ * FAPI theme for an individual text elements.
+ */
+function theme_cck_fullname($element) {
+  return $element['#children'];
+}
+
+/**
+ * Implementation of hook_widget().
+ */
+function cck_fullname_widget(&$form, &$form_state, $field, $items, $delta = 0) {
+  $element = array(
+    '#type' => $field['widget']['type'],
+    '#default_value' => isset($items[$delta]) ? $items[$delta] : '',
+  );
+  return $element;
+}
+
+/**
+ * Implementation of CCK's hook_field_formatter_info().
+ *
+ * Returns information about available field formatters.
+ */
+function cck_fullname_field_formatter_info() {
+  return array(
+    'default' => array(
+       'label' => t('Default'),
+       'field types' => array('cck_fullname'),
+    ),
+    'lno' => array(
+       'label' => t('Last name only'),
+       'field types' => array('cck_fullname'),
+    ),
+    'fno' => array(
+       'label' => t('First name only'),
+       'field types' => array('cck_fullname'),
+    ),
+    'lnfs' => array(
+       'label' => t('Last, first short'),
+       'field types' => array('cck_fullname'),
+    ),
+    'lnfl' => array(
+       'label' => t('Last, first long'),
+       'field types' => array('cck_fullname'),
+    ),
+  );
+}
+
+/**
+ * Theme function for default formatter.
+ */
+function theme_cck_fullname_formatter_default($element = NULL) {
+  if(empty($element['#item'])) {
+    return '';
+  }
+
+  $stuff = $element['#item'];
+
+  $flds = array('prefix', 'first', 'middle', 'last', 'suffix');
+  $ret = '<div class="cck_fullname">';
+  $sep = '';
+  foreach($flds as $fld) {
+    if(!empty($stuff['safe_' . $fld ])) {
+      $ret .= $sep . '<span class="' . $fld . '">' . $stuff['safe_' . $fld ] . '</span>';
+      $sep = "&nbsp";
+    }
+  }
+
+  $ret .= '</div>';
+
+  return $ret;
+}
+
+/**
+ * Theme function for last name only formatter.
+ */
+function theme_cck_fullname_formatter_lno($element = NULL) {
+  if(empty($element['#item'])) {
+    return '';
+  }
+
+  $stuff = $element['#item'];
+
+  $flds = array('last');
+  $ret = '<div class="cck_fullname">';
+  $sep = '';
+  foreach($flds as $fld) {
+    if(!empty($stuff['safe_' . $fld ])) {
+      $ret .= $sep . '<span class="' . $fld . '">' . $stuff['safe_' . $fld ] . '</span>';
+      $sep = "&nbsp";
+    }
+  }
+
+  $ret .= '</div>';
+
+  return $ret;
+}
+
+/**
+ * Theme function for first name only formatter.
+ */
+function theme_cck_fullname_formatter_fno($element = NULL) {
+  if(empty($element['#item'])) {
+    return '';
+  }
+
+  $stuff = $element['#item'];
+
+  $flds = array('first');
+  $ret = '<div class="cck_fullname">';
+  $sep = '';
+  foreach($flds as $fld) {
+    if(!empty($stuff['safe_' . $fld ])) {
+      $ret .= $sep . '<span class="' . $fld . '">' . $stuff['safe_' . $fld ] . '</span>';
+      $sep = "&nbsp";
+    }
+  }
+
+  $ret .= '</div>';
+
+  return $ret;
+}
+
+/**
+ * Theme function for last name first short formatter.
+ */
+function theme_cck_fullname_formatter_lnfs($element = NULL) {
+  if(empty($element['#item'])) {
+    return '';
+  }
+
+  $stuff = $element['#item'];
+
+  $flds = array('last', 'first', 'middle');
+  $ret = '<div class="cck_fullname">';
+  $sep = '';
+  foreach($flds as $fld) {
+    if(!empty($stuff['safe_' . $fld ])) {
+      $ret .= $sep . '<span class="' . $fld . '">' . $stuff['safe_' . $fld ] . '</span>';
+      if ($fld == 'last') {
+        $sep = ",&nbsp";
+      }
+      else {
+        $sep = "&nbsp";
+      }
+    }
+  }
+
+  $ret .= '</div>';
+
+  return $ret;
+}
+
+/**
+ * Theme function for last name first short formatter.
+ */
+function theme_cck_fullname_formatter_lnfl($element = NULL) {
+  if(empty($element['#item'])) {
+    return '';
+  }
+
+  $stuff = $element['#item'];
+
+  $flds = array('last', 'suffix', 'prefix', 'first', 'middle');
+  $ret = '<div class="cck_fullname">';
+  $sep = '';
+  foreach($flds as $fld) {
+    if(!empty($stuff['safe_' . $fld ])) {
+      $ret .= $sep . '<span class="' . $fld . '">' . $stuff['safe_' . $fld ] . '</span>';
+      if ($fld == 'suffix') {
+        $sep = ",&nbsp";
+      }
+      else {
+        $sep = "&nbsp";
+      }
+    }
+    elseif ($fld == 'suffix') {
+      $ret .= ",&nbsp";
+    }
+  }
+
+  $ret .= '</div>';
+
+  return $ret;
+}
+
+/**
+ * Return a themed form element.
+ *
+ * @param element
+ *   An associative array containing the properties of the element.
+ *   Properties used: title, description, id, required
+ * @param $value
+ *   The form element's data.
+ * @return
+ *   A string representing the form element.
+ *
+ * @ingroup themeable
+ */
+function theme_cck_fullname_form_element($element, $value) {
+  // This is also used in the installer, pre-database setup.
+  $t = get_t();
+  
+  $output = '<div class="form-item"';
+  if (!empty($element['#id'])) {
+    $output .= ' id="'. $element['#id'] .'-wrapper"';
+  }
+  $output .= ">\n";
+  $required = !empty($element['#is_required']) ? '<span class="form-required" title="'. $t('This field is required.') .'">*</span>' : '';
+  
+  if (!empty($element['#title'])) {
+    $title = $element['#title'];
+    if (!empty($element['#id'])) {
+      $output .= ' <label for="'. $element['#id'] .'">'. $t('!title: !required', array('!title' => filter_xss_admin($title), '!required' => $required)) ."</label>\n";
+    }
+    else {
+      $output .= ' <label>'. $t('!title: !required', array('!title' => filter_xss_admin($title), '!required' => $required)) ."</label>\n";
+    }
+  }
+  
+  $output .= " $value\n";
+  
+  if (!empty($element['#description'])) {
+    $output .= ' <div class="description">'. $element['#description'] ."</div>\n";
+  }
+  
+  $output .= "</div>\n";
+  
+  return $output;
+}
+
+/**
+ * Format a textfield.
+ *
+ * @param $element
+ *   An associative array containing the properties of the element.
+ *   Properties used:  title, value, description, size, maxlength, required, attributes autocomplete_path
+ * @return
+ *   A themed HTML string representing the textfield.
+ *
+ * @ingroup themeable
+ */
+function theme_cck_fullname_textfield($element) {
+  $size = empty($element['#size']) ? '' : ' size="'. $element['#size'] .'"';
+  $maxlength = empty($element['#maxlength']) ? '' : ' maxlength="'. $element['#maxlength'] .'"';
+  $class = array('form-text');
+  $extra = '';
+  $output = '';
+  
+  if ($element['#autocomplete_path'] && menu_valid_path(array('link_path' => $element['#autocomplete_path']))) {
+    drupal_add_js('misc/autocomplete.js');
+    $class[] = 'form-autocomplete';
+    $extra =  '<input class="autocomplete" type="hidden" id="'. $element['#id'] .'-autocomplete" value="'. check_url(url($element['#autocomplete_path'], array('absolute' => TRUE))) .'" disabled="disabled" />';
+  }
+  _form_set_class($element, $class);
+  
+  if (isset($element['#field_prefix'])) {
+    $output .= '<span class="field-prefix">'. $element['#field_prefix'] .'</span> ';
+  }
+  
+  $output .= '<input type="text"'. $maxlength .' name="'. $element['#name'] .'" id="'. $element['#id'] .'"'. $size .' value="'. check_plain($element['#value']) .'"'. drupal_attributes($element['#attributes']) .' />';
+  
+  if (isset($element['#field_suffix'])) {
+    $output .= ' <span class="field-suffix">'. $element['#field_suffix'] .'</span>';
+  }
+  
+  return theme('cck_fullname_form_element', $element, $output) . $extra;
+}
+
+/**
+ * Integration with the diff module
+ *
+ * @param array $node
+ * @param array $field
+ * @param array $items
+ * @return array
+ */
+function cck_fullname_content_diff_values($node, $field, $items) {
+  $all_vals = array();
+  foreach ($items as $delta => $values) {
+    foreach ($values as $index => $item) {
+      if ($index == '_remove') {
+        continue;
+      }
+      else {
+        $all_vals[] = $item;
+      }
+    }
+  }
+  return $all_vals;
+}
+
+/**
+ * For token integration
+ * @param string $type
+ * @return array
+ */
+function cck_fullname_token_list($type = 'all') {
+    if ($type == 'field' || $type == 'all') {
+      $tokens = array();
+
+      $tokens['Fullname']['prefix']   = t("Prefix");
+      $tokens['Fullname']['prefix-raw']   = t("Unfiltered prefix. WARNING - raw user input.");
+      $tokens['Fullname']['first'] = t("First name");
+      $tokens['Fullname']['first-raw'] = t("Unfiltered first name. WARNING - raw user input.");
+      $tokens['Fullname']['middle']  = t("Middle name");
+      $tokens['Fullname']['middle-raw']  = t("Unfiltered middle name or initial. WARNING - raw user input.");
+      $tokens['Fullname']['last']  = t("Last name");
+      $tokens['Fullname']['last-raw']  = t("Unfiltered last name. WARNING - raw user input.");
+      $tokens['Fullname']['suffix']  = t("Suffix");
+      $tokens['Fullname']['suffix-raw']  = t("Unfiltered suffix. WARNING - raw user input.");
+
+      return $tokens;
+    }
+  }
+
+/**
+ * For token integration
+ * @param string $type
+ * @param array $object
+ * @return array
+ */
+  function cck_fullname_token_values($type, $object = NULL) {
+    if ($type == 'field') {
+      //we just output the first one since that seems to be convention - probably since the token_list function doesn't
+      //specify a different token for each column and delta. for example there is no prefix-0, prefix-1, etc. i suppose
+      //we could make both dynamic token_list and dynamic token_values functions if it made sense.
+      $item = $object[0];
+
+      $tokens['prefix']   =  $item['safe_prefix'];
+      $tokens['prefix-raw']   = $item['prefix'];
+      $tokens['first']   = $item['safe_first'];
+      $tokens['first-raw']   = $item['first'];
+      $tokens['middle']   = $item['safe_middle'];
+      $tokens['middle-raw']   = $item['middle'];
+      $tokens['last']   = $item['safe_last'];
+      $tokens['last-raw']   = $item['last'];
+      $tokens['suffix']   = $item['safe_suffix'];
+      $tokens['suffix-raw']   = $item['suffix'];
+
+      return $tokens;
+    }
+  }

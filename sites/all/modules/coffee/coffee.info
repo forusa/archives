@@ -1,0 +1,11 @@
+name = Coffee
+description = An administrative module to switch between admin pages real fast, like Alfred or Spotlight on OS X.
+core = 6.x
+package = Administration
+
+; Information added by drupal.org packaging script on 2012-05-16
+version = "6.x-1.0"
+core = "6.x"
+project = "coffee"
+datestamp = "1337170556"
+

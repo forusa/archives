@@ -1,0 +1,8 @@
+; $Id$
+name = Drupalwiki imageselect element
+description = Use this helper to make nice looking select boxes with images
+package=Drupal Wiki
+core = 6.x
+
+l10n url=http://localize.maintain.kontextwork.de/sites/default/files/translations/l10n_server.xml
+l10n server=localize.maintain.kontextwork.de

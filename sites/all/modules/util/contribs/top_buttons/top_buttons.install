@@ -1,0 +1,22 @@
+<?php
+
+/**
+ * @file
+ * Install code for Top Buttons add-on to Util.
+ */
+
+/**
+ * Implements hook_install();
+ * Set module weight higher to better see modified buttons.
+ */
+function top_buttons_install() {
+  db_query("UPDATE {system} SET weight = 20 WHERE name = 'top_buttons'");
+}
+
+/**
+ * Implements hook_uninstall();
+ * Remove module variables.
+ */
+function top_buttons_uninstall() {
+  db_query("DELETE FROM {variable} WHERE name LIKE 'top_buttons_%'");
+}

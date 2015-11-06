@@ -1,0 +1,14 @@
+
+name = Media: Flickr
+description = Embedded Video Field provider file for Flickr.com photosets.
+core = 6.x
+dependencies[] = emvideo
+package = Media
+
+
+; Information added by Drupal.org packaging script on 2014-10-11
+version = "6.x-1.13"
+core = "6.x"
+project = "media_flickr"
+datestamp = "1413045534"
+

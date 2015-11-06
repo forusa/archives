@@ -1,0 +1,12 @@
+; $Id: media_audio_flotsam.info,v 1.1 2010/09/20 11:12:22 alexua Exp $
+name = Media: Audio Flotsam
+description = Legacy Embedded Audio Field providers that were removed from Emfield, but don't have their own Media modules.
+core = 6.x
+dependencies[] = emaudio
+package = Media
+; Information added by drupal.org packaging script on 2010-12-08
+version = "6.x-1.1"
+core = "6.x"
+project = "media_audio_flotsam"
+datestamp = "1291844142"
+

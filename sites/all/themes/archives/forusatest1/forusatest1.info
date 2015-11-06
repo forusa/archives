@@ -1,0 +1,19 @@
+
+
+name = FOR-USA Test Theme 1
+
+description = Archived test theme - not production-ready.
+
+version = VERSION
+
+core = 6.x
+
+engine = phptemplate
+
+stylesheets[all][] = forusatest1.css
+
+base theme = forusaleft
+
+
+
+

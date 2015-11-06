@@ -1,0 +1,32 @@
+
+
+name = Fellowship of Reconciliation USA
+
+description = FOR-USA theme based on Marinelli (both sidebars on left). Inheritance: Marinelli > Gnifetti > FOR-USA
+
+version = VERSION
+
+core = 6.x
+
+engine = phptemplate
+
+stylesheets[all][] = css/forusa-style.css
+stylesheets[all][] = css/forusa-typography.css
+stylesheets[all][] = css/forusa-links.css
+stylesheets[all][] = css/forusa-layout.css
+stylesheets[all][] = css/forusa-graphics.css
+stylesheets[all][] = css/forusa-og.css
+stylesheets[all][] = css/forusa-menus.css
+stylesheets[all][] = css/forusa-blocks.css
+
+; Styles for rich text editor (CK Editor)
+stylesheets[all][] = css/wysiwyg-styles.css
+
+base theme = gnifetti
+
+regions[header] = Header
+regions[content_top] = Above Content
+regions[left] = Sidebar 1
+regions[right] = Sidebar 2
+regions[content] = Content
+regions[footer] = Footer

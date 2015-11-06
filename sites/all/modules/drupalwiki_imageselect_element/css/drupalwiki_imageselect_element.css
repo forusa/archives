@@ -1,0 +1,24 @@
+.drupalwiki_imageselect_element_container span.select_option,.drupalwiki_imageselect_element_container span.image_title {
+  margin:0px 4px;
+  float:left;
+}
+
+.drupalwiki_imageselect_element_container span.image_title {
+ font-size: 110%;
+ color:grey;
+ margin-top: 10px;
+}
+
+.drupalwiki_imageselect_element_container span.select_option img{
+  padding:2px;
+  border:2px dotted transparent;
+  cursor: pointer;
+}
+
+.drupalwiki_imageselect_element_container span.selected img {  
+  border:2px dotted #3366ff;
+}
+
+.clearfix {
+   clear:both;
+}

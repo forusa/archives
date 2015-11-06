@@ -1,0 +1,15 @@
+
+name = Log user filter
+description = Provides user filter for "Recent log" report page.
+core = 6.x
+version = 0.1
+package = Util
+
+dependencies[] = dblog_filters
+
+; Information added by drupal.org packaging script on 2012-08-26
+version = "6.x-3.1"
+core = "6.x"
+project = "util"
+datestamp = "1345944854"
+

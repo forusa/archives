@@ -1,0 +1,117 @@
+<?php
+
+/**
+ * @file
+ * Integrates IMCE into FileField.
+ */
+
+/**
+ * Implements hook_menu().
+ */
+function imce_filefield_menu() {
+  $items = array();
+  $items['imce-filefield/%/%'] = array(
+    'page callback' => 'imce_filefield_page',
+    'page arguments' => array(1, 2),
+    'access callback' => 'filefield_edit_access',
+    'access arguments' => array(1, 2),
+    'file' => 'imce_filefield.inc',
+    'type' => MENU_CALLBACK,
+  );
+  return $items;
+}
+
+/**
+ * Implements hook_elements().
+ */
+function imce_filefield_elements() {
+  $elements = array();
+  foreach (imce_filefield_supported_widgets() as $widget) {
+    $elements[$widget]['#process'] = array('imce_filefield_field_process');
+    $elements[$widget]['#pre_render'] = array('imce_filefield_field_pre_render');
+    $elements[$widget]['#filefield_value_callback'] = array('imce_filefield_field_value');
+  }
+  return $elements;
+}
+
+/**
+ * Implements hook_widget_settings_alter().
+ */
+function imce_filefield_widget_settings_alter(&$settings, $op, $widget) {
+  $type = isset($widget['widget_type']) ? $widget['widget_type'] : $widget['type'];
+  if (in_array($type, imce_filefield_supported_widgets())) {
+    $key = 'imce_filefield_on';
+    if ($op == 'form') {
+      $settings += array($key => array(
+        '#type' => 'checkbox', 
+        '#title' => t('Allow users to select files from <a href="!url">IMCE File Browser</a> for this field.', array('!url' => url('admin/settings/imce'))),
+        '#default_value' => isset($widget[$key]) ? $widget[$key] : 0,
+        '#weight' => 3,
+      ));
+    }
+    elseif ($op == 'save') {
+      $settings[] = $key;
+    }
+  }
+}
+
+/**
+ * Returns supported filefield widgets.
+ */
+function imce_filefield_supported_widgets() {
+  static $widgets;
+  if (!isset($widgets)) {
+    $widgets = array('filefield_widget', 'imagefield_widget');
+    drupal_alter('imce_filefield_supported_widgets', $widgets);
+    $widgets = array_unique($widgets);
+  }
+  return $widgets;
+}
+
+/**
+ * Extends filefield_widget element.
+ */
+function imce_filefield_field_process($element, $edit, &$form_state, $form) {
+  imce_filefield_inc();
+  return _imce_filefield_field_process($element, $edit, $form_state, $form);
+}
+
+/**
+ * Field value callback.
+ */
+function imce_filefield_field_value($element, &$item) {
+  if (!empty($item['imce_filefield']['fid'])) {
+    imce_filefield_inc();
+    return _imce_filefield_field_value($element, $item);
+  }
+}
+
+/**
+ * Pre render callback. Add page elements.
+ */
+function imce_filefield_field_pre_render($element) {
+  if (isset($element['imce_filefield'])) {
+    imce_filefield_inc();
+    _imce_filefield_field_pre_render($element);
+  }
+  return $element;
+}
+
+/**
+ * IMCE filefield operation.
+ */
+function imce_js_imce_filefield(&$imce) {
+  imce_filefield_inc();
+  return _imce_js_imce_filefield($imce);
+}
+
+/**
+ * Includes imce_filefield.inc.
+ */
+function imce_filefield_inc() {
+  static $done;
+  if (!isset($done)) {
+    $done = TRUE;
+    include_once './' . drupal_get_path('module', 'imce_filefield') . '/imce_filefield.inc';
+  }
+}

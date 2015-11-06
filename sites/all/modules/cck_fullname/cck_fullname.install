@@ -1,0 +1,29 @@
+<?php
+//$Id: cck_fullname.install,v 1.4.2.1 2010/09/15 02:04:31 rconstantine Exp $;
+/**
+* Implementation of hook_install().
+*/
+function cck_fullname_install() {
+  content_notify('install', 'cck_fullname');
+}
+
+/**
+* Implementation of hook_uninstall().
+*/
+function cck_fullname_uninstall() {
+  content_notify('uninstall', 'cck_fullname');
+}
+
+/**
+* Implementation of hook_enable().
+*/
+function cck_fullname_enable() {
+  content_notify('enable', 'cck_fullname');
+}
+
+/**
+* Implementation of hook_disable().
+*/
+function cck_fullname_disable() {
+  content_notify('disable', 'cck_fullname');
+}

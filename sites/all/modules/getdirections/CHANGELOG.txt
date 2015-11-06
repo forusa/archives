@@ -1,0 +1,1127 @@
+commit 16a93c0
+Author: hutch <hutch@midwales.net>
+Date:   Mon Dec 3 21:32:29 2012 +0000
+
+    improved getdirections_box template file
+
+getdirections_box.tpl.php
+
+commit 5ea116f
+Author: hutch <hutch@midwales.net>
+Date:   Fri Oct 12 23:37:57 2012 +0100
+
+    added bracket removal regex
+
+CHANGELOG.txt
+getdirections.module
+
+commit 1a86a74
+Author: hutch <hutch@midwales.net>
+Date:   Thu Oct 11 13:19:41 2012 +0100
+
+    added new feature map background color
+
+CHANGELOG.txt
+getdirections.admin.inc
+getdirections.module
+getdirections_v3.js
+getdirections_v3a.js
+getdirections_v3b.js
+
+commit e497195
+Author: hutch <hutch@midwales.net>
+Date:   Wed Sep 19 09:16:28 2012 +0100
+
+    fixed typos in getdirections module
+
+CHANGELOG.txt
+getdirections.module
+
+commit bf7d1a7
+Author: hutch <hutch@midwales.net>
+Date:   Tue Sep 18 15:39:59 2012 +0100
+
+    improved README
+
+README.txt
+
+commit dde0a95
+Author: hutch <hutch@midwales.net>
+Date:   Tue Sep 18 11:33:36 2012 +0100
+
+    added country checks
+
+getdirections.module
+
+commit ca19357
+Author: hutch <hutch@midwales.net>
+Date:   Thu Aug 16 16:36:17 2012 +0100
+
+    fixed bug in getdirections_direction_box
+
+CHANGELOG.txt
+getdirections.module
+
+commit 722ff65
+Author: hutch <hutch@midwales.net>
+Date:   Thu Aug 9 21:02:38 2012 +0100
+
+    better buttons
+
+CHANGELOG.txt
+getdirections.admin.inc
+getdirections.module
+getdirections_admin.js
+getdirections_v3.js
+getdirections_v3a.js
+getdirections_v3b.js
+
+commit 1c70d0c
+Author: hutch <hutch@midwales.net>
+Date:   Wed Jul 18 09:47:37 2012 +0100
+
+    added transit dates feature
+
+CHANGELOG.txt
+getdirections.admin.inc
+getdirections.module
+getdirections_admin.js
+getdirections_v3.js
+getdirections_v3a.js
+getdirections_v3b.js
+
+commit f8e292c
+Author: hutch <hutch@midwales.net>
+Date:   Sat Jul 14 14:06:34 2012 +0100
+
+    fixed bug in waypoints feature
+
+CHANGELOG.txt
+getdirections.module
+getdirections.theme.inc
+
+commit b619ebe
+Author: hutch <hutch@midwales.net>
+Date:   Sat Jul 14 10:16:50 2012 +0100
+
+    added waypoints autocomplete
+
+CHANGELOG.txt
+getdirections.admin.inc
+getdirections.module
+getdirections.theme.inc
+getdirections_v3a.js
+getdirections_v3b.js
+
+commit 1aeacbd
+Author: hutch <hutch@midwales.net>
+Date:   Thu Jul 12 09:09:51 2012 +0100
+
+    added viewport bias
+
+CHANGELOG.txt
+getdirections.admin.inc
+getdirections.module
+getdirections_v3a.js
+getdirections_v3b.js
+
+commit 05e2835
+Author: hutch <hutch@midwales.net>
+Date:   Thu Jul 12 08:39:11 2012 +0100
+
+    added transit layer
+
+getdirections.admin.inc
+getdirections.css
+getdirections.module
+getdirections.theme.inc
+getdirections_v3.js
+getdirections_v3a.js
+getdirections_v3b.js
+
+commit 95ed146
+Author: hutch <hutch@midwales.net>
+Date:   Thu Jul 5 16:44:19 2012 +0100
+
+    added transit feature
+
+CHANGELOG.txt
+getdirections.module
+getdirections_v3.js
+getdirections_v3a.js
+getdirections_v3b.js
+
+commit 26f62d4
+Author: hutch <hutch@midwales.net>
+Date:   Sat Jun 2 16:31:11 2012 +0100
+
+    added getdirections_latlons function
+
+CHANGELOG.txt
+getdirections.module
+
+commit df1c242
+Author: hutch <hutch@midwales.net>
+Date:   Sat Jun 2 16:30:25 2012 +0100
+
+    updated README
+
+README.txt
+
+commit aec4911
+Author: hutch <hutch@midwales.net>
+Date:   Tue May 22 16:48:34 2012 +0100
+
+    fixed getlocations_colorbox in init
+
+CHANGELOG.txt
+getdirections.module
+
+commit 3bdbe19
+Author: hutch <hutch@midwales.net>
+Date:   Wed May 2 07:56:39 2012 +0100
+
+    added javascript paths
+
+CHANGELOG.txt
+getdirections.admin.inc
+getdirections.module
+
+commit 9cafc0b
+Author: hutch <hutch@midwales.net>
+Date:   Sat Mar 31 21:09:50 2012 +0100
+
+    themed address string
+
+CHANGELOG.txt
+getdirections.module
+getdirections.theme.inc
+
+commit 7138084
+Author: hutch <hutch@midwales.net>
+Date:   Thu Mar 29 10:06:53 2012 +0100
+
+    added nicer return in case of malformations
+
+CHANGELOG.txt
+getdirections.module
+
+commit 9419e83
+Author: hutch <hutch@midwales.net>
+Date:   Fri Mar 2 21:27:28 2012 +0000
+
+    improved link in views
+
+CHANGELOG.txt
+getdirections.views_default.inc
+
+commit 4de55ec
+Author: hutch <hutch@midwales.net>
+Date:   Sun Jan 29 09:58:09 2012 +0000
+
+    fixed bugs in getdirections_box
+
+CHANGELOG.txt
+getdirections.module
+
+commit 2543bae
+Author: hutch <hutch@midwales.net>
+Date:   Wed Jan 25 17:10:21 2012 +0000
+
+    added api3 key option
+
+getdirections.admin.inc
+getdirections.module
+
+commit af21829
+Author: hutch <hutch@midwales.net>
+Date:   Mon Jan 23 22:07:04 2012 +0000
+
+    added latlon to getdirections_box
+
+CHANGELOG.txt
+getdirections.module
+
+commit 9e08f9a
+Author: hutch <hutch@midwales.net>
+Date:   Fri Jan 20 13:25:11 2012 +0000
+
+    added https support
+
+CHANGELOG.txt
+getdirections.admin.inc
+getdirections.module
+getdirections_v2a.js
+getdirections_v3.js
+getdirections_v3a.js
+getdirections_v3b.js
+
+commit 3d6757e
+Author: hutch <hutch@midwales.net>
+Date:   Wed Dec 28 18:46:15 2011 +0000
+
+    improved jquery input detection for places autocomplete
+
+getdirections_v3a.js
+getdirections_v3b.js
+
+commit 98963a6
+Author: hutch <hutch@midwales.net>
+Date:   Wed Dec 28 13:26:05 2011 +0000
+
+    rationalised settings collection
+
+getdirections.module
+
+commit 5ff700b
+Author: hutch <hutch@midwales.net>
+Date:   Mon Dec 19 12:48:42 2011 +0000
+
+    fixed translation issue 1376052
+
+CHANGELOG.txt
+getdirections.module
+
+commit 1f39df0
+Author: hutch <hutch@midwales.net>
+Date:   Thu Nov 3 21:57:12 2011 +0000
+
+    coder review
+
+getdirections.admin.inc
+getdirections.module
+getdirections.theme.inc
+getdirections_box.tpl.php
+
+commit bf7f554
+Author: hutch <hutch@midwales.net>
+Date:   Thu Nov 3 10:31:40 2011 +0000
+
+    improved maptype dropdown in js and admin
+
+CHANGELOG.txt
+README.txt
+getdirections.admin.inc
+getdirections_v3.js
+getdirections_v3a.js
+getdirections_v3b.js
+
+commit 25b67a7
+Author: hutch <hutch@midwales.net>
+Date:   Mon Oct 17 21:53:03 2011 +0100
+
+    fixed trailing comma bug
+
+CHANGELOG.txt
+getdirections.css
+getdirections.js
+getdirections_v2.js
+getdirections_v2a.js
+
+commit c55ef49
+Author: hutch <hutch@midwales.net>
+Date:   Sat Sep 10 22:31:40 2011 +0100
+
+    fixed latlon check, added full drupal function naming to js
+
+getdirections.admin.inc
+getdirections.js
+getdirections.module
+getdirections.theme.inc
+getdirections_v2.js
+getdirections_v2a.js
+getdirections_v3.js
+getdirections_v3a.js
+getdirections_v3b.js
+
+commit 83a0588
+Author: hutch <hutch@midwales.net>
+Date:   Sat Aug 13 13:16:33 2011 +0100
+
+    added Return to page and show title for type location
+
+CHANGELOG.txt
+getdirections.module
+getdirections.theme.inc
+
+commit f718825
+Author: hutch <hutch@midwales.net>
+Date:   Sun Jul 31 20:28:06 2011 +0100
+
+    fixed show title feature
+
+CHANGELOG.txt
+getdirections.admin.inc
+getdirections.module
+
+commit 69152de
+Author: hutch <hutch@midwales.net>
+Date:   Sun Jul 24 23:47:49 2011 +0100
+
+    fixed disabled bug in admin
+
+getdirections.admin.inc
+
+commit 3c26013
+Author: hutch <hutch@midwales.net>
+Date:   Sun Jul 24 23:27:29 2011 +0100
+
+    fixed disabled bug in admin
+
+CHANGELOG.txt
+README.txt
+getdirections.admin.inc
+getdirections_v3.js
+
+commit 571b714
+Author: hutch <hutch@midwales.net>
+Date:   Sun Jul 10 00:19:07 2011 +0100
+
+    added config check
+
+CHANGELOG.txt
+getdirections.module
+
+commit e557207
+Author: hutch <hutch@midwales.net>
+Date:   Sat Jul 9 12:01:12 2011 +0100
+
+    fixed theming bug
+
+CHANGELOG.txt
+getdirections.theme.inc
+
+commit 4fcb5af
+Author: hutch <hutch@midwales.net>
+Date:   Fri Jul 8 23:35:47 2011 +0100
+
+    added Google Places Autocomplete
+
+CHANGELOG.txt
+getdirections.admin.inc
+getdirections.module
+getdirections.theme.inc
+getdirections_v3a.js
+getdirections_v3b.js
+
+commit 3cdfe7b
+Author: hutch <hutch@midwales.net>
+Date:   Sat Jun 25 21:31:36 2011 +0100
+
+    fixed libraries bug
+
+getdirections.module
+
+commit 6b59f00
+Author: hutch <hutch@midwales.net>
+Date:   Sat Jun 25 21:14:07 2011 +0100
+
+    added some bombproofing for latlon
+
+getdirections.module
+
+commit 263dce3
+Author: hutch <hutch@midwales.net>
+Date:   Sat Jun 25 15:40:54 2011 +0100
+
+    added panoramio layer
+
+CHANGELOG.txt
+getdirections.admin.inc
+getdirections.css
+getdirections.module
+getdirections.theme.inc
+getdirections_v3.js
+getdirections_v3a.js
+getdirections_v3b.js
+
+commit a972b27
+Author: hutch <hutch@midwales.net>
+Date:   Fri Jun 24 16:54:00 2011 +0100
+
+    fixed array bug in _getdirections_loadaddress
+
+CHANGELOG.txt
+getdirections.module
+
+commit c18eb6d
+Author: hutch <hutch@midwales.net>
+Date:   Thu Jun 9 15:24:23 2011 +0100
+
+    updated v3 googlemaps API
+
+CHANGELOG.txt
+getdirections.admin.inc
+getdirections.module
+getdirections_v3.js
+getdirections_v3a.js
+getdirections_v3b.js
+
+commit 159f4db
+Author: hutch <hutch@midwales.net>
+Date:   Sat Mar 12 13:01:08 2011 +0000
+
+    added draggable route, fixed div in theme
+
+CHANGELOG.txt
+getdirections.admin.inc
+getdirections.module
+getdirections.theme.inc
+getdirections_v3b.js
+
+commit 58f80f1
+Author: hutch <hutch@midwales.net>
+Date:   Sat Mar 5 16:38:32 2011 +0000
+
+    added bicycleinfo
+
+CHANGELOG.txt
+getdirections.admin.inc
+getdirections.module
+getdirections.theme.inc
+getdirections_v3.js
+getdirections_v3a.js
+
+commit 3825bb8
+Author: hutch <hutch@midwales.net>
+Date:   Tue Mar 1 21:43:00 2011 +0000
+
+    removed unwanted keyword
+
+getdirections.admin.inc
+getdirections.api.inc
+getdirections.css
+getdirections.example_config.inc
+getdirections.info
+getdirections.install
+getdirections.js
+getdirections.module
+getdirections.theme.inc
+getdirections.views_default.inc
+getdirections_admin.js
+getdirections_box.js
+getdirections_box.tpl.php
+getdirections_v2.js
+getdirections_v2a.js
+getdirections_v3.js
+getdirections_v3a.js
+
+commit c45c33e
+Author: The Great Git Migration <tggm@no-reply.drupal.org>
+Date:   Fri Feb 25 02:12:34 2011 +0000
+
+    Removing translation directories
+
+translations/getdirections-module.pot
+translations/it.po
+
+commit 10d852e
+Author: The Great Git Migration <tggm@no-reply.drupal.org>
+Date:   Fri Feb 25 02:12:34 2011 +0000
+
+    Stripping CVS keywords
+
+CHANGELOG.txt
+getdirections.admin.inc
+getdirections.api.inc
+getdirections.css
+getdirections.example_config.inc
+getdirections.info
+getdirections.install
+getdirections.js
+getdirections.module
+getdirections.theme.inc
+getdirections.views_default.inc
+getdirections_admin.js
+getdirections_box.js
+getdirections_box.tpl.php
+getdirections_v2.js
+getdirections_v2a.js
+getdirections_v3.js
+getdirections_v3a.js
+translations/getdirections-module.pot
+translations/it.po
+
+commit b78a41e
+Author: Bob Hutchinson <hutch@midwales.net>
+Date:   Mon Feb 21 13:25:09 2011 +0000
+
+    fixed api key validation bug
+
+CHANGELOG.txt
+getdirections.admin.inc
+
+commit ce75c56
+Author: Bob Hutchinson <hutch@midwales.net>
+Date:   Thu Feb 10 12:49:01 2011 +0000
+
+    added show duration feature
+
+CHANGELOG.txt
+getdirections.admin.inc
+getdirections.css
+getdirections.module
+getdirections.theme.inc
+getdirections_v2.js
+getdirections_v2a.js
+getdirections_v3.js
+getdirections_v3a.js
+
+commit bd3dd30
+Author: Bob Hutchinson <hutch@midwales.net>
+Date:   Mon Jan 31 21:00:30 2011 +0000
+
+    added googlebar
+
+CHANGELOG.txt
+getdirections.admin.inc
+getdirections.module
+getdirections.theme.inc
+getdirections_v2.js
+getdirections_v2a.js
+
+commit a506951
+Author: Bob Hutchinson <hutch@midwales.net>
+Date:   Wed Jan 12 18:45:49 2011 +0000
+
+    added togglefromto
+
+getdirections.module
+getdirections.theme.inc
+
+commit cd7f215
+Author: Bob Hutchinson <hutch@midwales.net>
+Date:   Wed Jan 12 17:19:29 2011 +0000
+
+    added togglefromto
+
+CHANGELOG.txt
+getdirections.admin.inc
+getdirections.css
+getdirections.module
+getdirections.theme.inc
+getdirections_v2.js
+getdirections_v3.js
+
+commit 7b285bf
+Author: Bob Hutchinson <hutch@midwales.net>
+Date:   Tue Dec 28 15:21:46 2010 +0000
+
+    added trafficinfo
+
+CHANGELOG.txt
+getdirections.admin.inc
+getdirections.css
+getdirections.module
+getdirections.theme.inc
+getdirections_v2.js
+getdirections_v2a.js
+getdirections_v3.js
+getdirections_v3a.js
+
+commit 9b2626f
+Author: Bob Hutchinson <hutch@midwales.net>
+Date:   Mon Dec 27 11:50:57 2010 +0000
+
+    added total distance calculation, added support for multiple locations in views
+
+CHANGELOG.txt
+README.txt
+getdirections.admin.inc
+getdirections.module
+getdirections.theme.inc
+getdirections.views_default.inc
+getdirections_v2.js
+getdirections_v2a.js
+getdirections_v3.js
+getdirections_v3a.js
+
+commit 481fbb8
+Author: Bob Hutchinson <hutch@midwales.net>
+Date:   Mon Dec 13 11:52:14 2010 +0000
+
+    added location_id as in #994882
+
+README.txt
+
+commit c2b6f96
+Author: Bob Hutchinson <hutch@midwales.net>
+Date:   Mon Dec 13 11:37:30 2010 +0000
+
+    added location_id as in #994882
+
+CHANGELOG.txt
+getdirections.api.inc
+getdirections.module
+
+commit a86c950
+Author: Bob Hutchinson <hutch@midwales.net>
+Date:   Wed Dec 8 22:49:20 2010 +0000
+
+    added getdirections_latlon
+
+README.txt
+getdirections.api.inc
+
+commit fe58bef
+Author: Bob Hutchinson <hutch@midwales.net>
+Date:   Wed Dec 8 11:53:40 2010 +0000
+
+    added getdirections_latlon
+
+getdirections.module
+
+commit bce05f7
+Author: Bob Hutchinson <hutch@midwales.net>
+Date:   Wed Dec 8 10:37:14 2010 +0000
+
+    added getdirections_latlon
+
+CHANGELOG.txt
+getdirections.module
+
+commit 76fbf4d
+Author: Bob Hutchinson <hutch@midwales.net>
+Date:   Sun Nov 7 18:21:48 2010 +0000
+
+    fixed reference bug in call to jquery_update_preprocess_page
+
+getdirections.theme.inc
+
+commit d6dbdd5
+Author: Bob Hutchinson <hutch@midwales.net>
+Date:   Wed Oct 20 22:55:41 2010 +0000
+
+    updated translations
+
+CHANGELOG.txt
+translations/getdirections-module.pot
+
+commit 0c97ef0
+Author: Bob Hutchinson <hutch@midwales.net>
+Date:   Tue Sep 7 08:20:39 2010 +0000
+
+    fixed jquery_update bug, improved docs
+
+CHANGELOG.txt
+README.txt
+getdirections.js
+getdirections.theme.inc
+
+commit 27c95e1
+Author: Bob Hutchinson <hutch@midwales.net>
+Date:   Mon Sep 6 11:54:13 2010 +0000
+
+    added colorbox support
+
+CHANGELOG.txt
+README.txt
+getdirections.admin.inc
+getdirections.js
+getdirections.module
+getdirections.theme.inc
+getdirections_admin.js
+getdirections_box.js
+getdirections_box.tpl.php
+
+commit 5439998
+Author: Bob Hutchinson <hutch@midwales.net>
+Date:   Fri Sep 3 13:06:33 2010 +0000
+
+    fixed getdirections_help
+
+CHANGELOG.txt
+getdirections.theme.inc
+getdirections_v2a.js
+getdirections_v3a.js
+
+commit fa2a7f5
+Author: Bob Hutchinson <hutch@midwales.net>
+Date:   Thu Aug 26 17:34:12 2010 +0000
+
+    added keep title feature #893162
+
+CHANGELOG.txt
+getdirections.admin.inc
+getdirections.module
+translations/getdirections-module.pot
+
+commit bbd007e
+Author: Bob Hutchinson <hutch@midwales.net>
+Date:   Tue Aug 24 15:12:42 2010 +0000
+
+    added sanity checks for lat,lon
+
+CHANGELOG.txt
+getdirections.module
+
+commit 592e24a
+Author: Bob Hutchinson <hutch@midwales.net>
+Date:   Sun Aug 22 11:18:37 2010 +0000
+
+    added advanced features
+
+CHANGELOG.txt
+getdirections.admin.inc
+getdirections.api.inc
+getdirections.example_config.inc
+getdirections.js
+getdirections.module
+getdirections.theme.inc
+getdirections_v2.js
+getdirections_v2a.js
+getdirections_v3.js
+getdirections_v3a.js
+
+commit 09ce03f
+Author: Bob Hutchinson <hutch@midwales.net>
+Date:   Tue Aug 17 17:46:48 2010 +0000
+
+    updated translations file
+
+translations/getdirections-module.pot
+
+commit 97805c3
+Author: Bob Hutchinson <hutch@midwales.net>
+Date:   Sat Aug 14 23:15:32 2010 +0000
+
+    fixed bug trailing comma #882582
+
+CHANGELOG.txt
+getdirections_v3.js
+
+commit b4b3d46
+Author: Bob Hutchinson <hutch@midwales.net>
+Date:   Thu Aug 5 18:51:58 2010 +0000
+
+    updated pot file
+
+translations/getdirections-module.pot
+
+commit bcfa681
+Author: Bob Hutchinson <hutch@midwales.net>
+Date:   Thu Aug 5 18:49:00 2010 +0000
+
+    Added more t() to form. Fixed some defaults in admin
+
+CHANGELOG.txt
+getdirections.admin.inc
+getdirections.module
+getdirections.views_default.inc
+
+commit 420ab6e
+Author: Bob Hutchinson <hutch@midwales.net>
+Date:   Thu Aug 5 16:00:48 2010 +0000
+
+     Moved prefix and suffix from form to theme.
+
+CHANGELOG.txt
+getdirections.module
+getdirections.theme.inc
+
+commit 642eaad
+Author: Bob Hutchinson <hutch@midwales.net>
+Date:   Thu Aug 5 15:11:09 2010 +0000
+
+    fixed bug in form, reset value elements to hidden, required for js.
+
+CHANGELOG.txt
+getdirections.module
+
+commit 51c6390
+Author: Bob Hutchinson <hutch@midwales.net>
+Date:   Wed Jul 14 20:24:43 2010 +0000
+
+    fixed bug in locale
+
+getdirections.module
+
+commit 309d247
+Author: Bob Hutchinson <hutch@midwales.net>
+Date:   Mon Jun 21 08:57:05 2010 +0000
+
+    added user return link option, fixed bug in getdirections_user view, fixed bug in initial default settings
+
+CHANGELOG.txt
+getdirections.admin.inc
+getdirections.module
+getdirections.theme.inc
+getdirections.views_default.inc
+translations/getdirections-module.pot
+
+commit 0952730
+Author: Bob Hutchinson <hutch@midwales.net>
+Date:   Sun Jun 20 13:36:38 2010 +0000
+
+    added page return link option, added validation of admin settings form, replaced hidden form elements with value
+
+CHANGELOG.txt
+getdirections.admin.inc
+getdirections.css
+getdirections.module
+getdirections.theme.inc
+translations/getdirections-module.pot
+
+commit 9c5729f
+Author: Bob Hutchinson <hutch@midwales.net>
+Date:   Sat Jun 19 22:31:24 2010 +0000
+
+    improved documentation
+
+CHANGELOG.txt
+README.txt
+
+commit 9f9aa8f
+Author: Bob Hutchinson <hutch@midwales.net>
+Date:   Sat Jun 19 13:25:49 2010 +0000
+
+    fixed update bug
+
+CHANGELOG.txt
+getdirections.install
+
+commit 2805e9c
+Author: Bob Hutchinson <hutch@midwales.net>
+Date:   Sat Jun 19 11:59:51 2010 +0000
+
+    replaced split with explode
+
+CHANGELOG.txt
+getdirections.module
+
+commit 2f46d0c
+Author: Bob Hutchinson <hutch@midwales.net>
+Date:   Sat Jun 19 11:49:03 2010 +0000
+
+    added menu access callback
+
+CHANGELOG.txt
+getdirections.module
+
+commit 061d158
+Author: Bob Hutchinson <hutch@midwales.net>
+Date:   Tue Jun 15 22:23:54 2010 +0000
+
+    fixed revisions bug
+
+CHANGELOG.txt
+getdirections.admin.inc
+getdirections.api.inc
+getdirections.install
+getdirections.module
+
+commit 54fd62a
+Author: Bob Hutchinson <hutch@midwales.net>
+Date:   Thu Apr 22 16:47:38 2010 +0000
+
+    improved countries dropdown logic
+
+getdirections.module
+
+commit 226ca7a
+Author: Bob Hutchinson <hutch@midwales.net>
+Date:   Thu Apr 22 15:17:37 2010 +0000
+
+    added Italian translation
+
+translations/it.po
+
+commit 0662e87
+Author: Bob Hutchinson <hutch@midwales.net>
+Date:   Thu Apr 22 13:24:30 2010 +0000
+
+    improved countries dropdown
+
+CHANGELOG.txt
+getdirections.module
+
+commit 2e2e5b2
+Author: Bob Hutchinson <hutch@midwales.net>
+Date:   Fri Apr 9 20:35:49 2010 +0000
+
+    fixed bug with api_version in defaults
+
+CHANGELOG.txt
+getdirections.module
+
+commit d6fa715
+Author: Bob Hutchinson <hutch@midwales.net>
+Date:   Wed Mar 24 22:27:30 2010 +0000
+
+    added more combinations of user and node locations
+
+CHANGELOG.txt
+README.txt
+getdirections.api.inc
+getdirections.module
+
+commit ad95a28
+Author: Bob Hutchinson <hutch@midwales.net>
+Date:   Tue Mar 23 21:57:11 2010 +0000
+
+    added support for location_user
+
+CHANGELOG.txt
+README.txt
+getdirections.api.inc
+getdirections.module
+getdirections.views_default.inc
+
+commit a5655ff
+Author: Bob Hutchinson <hutch@midwales.net>
+Date:   Tue Mar 23 10:27:19 2010 +0000
+
+    integrated getdirections_views_block into Views
+
+CHANGELOG.txt
+contrib/getdirections_views_block_import.txt
+getdirections.module
+getdirections.views_default.inc
+
+commit 8edbbf1
+Author: Bob Hutchinson <hutch@midwales.net>
+Date:   Mon Mar 22 23:17:07 2010 +0000
+
+    added support for Googlemaps API version 3
+
+CHANGELOG.txt
+README.txt
+getdirections.admin.inc
+getdirections.css
+getdirections.js
+getdirections.module
+getdirections.theme.inc
+getdirections_v2.js
+getdirections_v3.js
+translations/getdirections-module.pot
+
+commit acf30bd
+Author: Bob Hutchinson <hutch@midwales.net>
+Date:   Fri Mar 19 21:58:50 2010 +0000
+
+    added config for To and From box width
+
+translations/getdirections-module.pot
+
+commit 65f5e50
+Author: Bob Hutchinson <hutch@midwales.net>
+Date:   Fri Mar 19 21:53:17 2010 +0000
+
+    added config for To and From box width
+
+CHANGELOG.txt
+getdirections.admin.inc
+getdirections.module
+
+commit fa8ea3e
+Author: Bob Hutchinson <hutch@midwales.net>
+Date:   Thu Mar 18 20:41:17 2010 +0000
+
+    improved views import
+
+README.txt
+contrib/getdirections_views_block_import.txt
+getdirections.info
+
+commit 323f3f3
+Author: Bob Hutchinson <hutch@midwales.net>
+Date:   Wed Mar 17 16:20:14 2010 +0000
+
+    removed commented line
+
+getdirections.theme.inc
+
+commit 2464e20
+Author: Bob Hutchinson <hutch@midwales.net>
+Date:   Wed Mar 17 13:25:44 2010 +0000
+
+    added support for loadFromWaypoints
+
+CHANGELOG.txt
+README.txt
+getdirections.api.inc
+getdirections.js
+getdirections.module
+getdirections.theme.inc
+translations/getdirections-module.pot
+
+commit bca2239
+Author: Bob Hutchinson <hutch@midwales.net>
+Date:   Tue Mar 16 22:27:41 2010 +0000
+
+    added contrib directory with views import
+
+contrib/getdirections_views_block_import.txt
+
+commit 81433df
+Author: Bob Hutchinson <hutch@midwales.net>
+Date:   Mon Mar 8 23:07:38 2010 +0000
+
+    fixed bug reported in issue #736148, default country
+
+CHANGELOG.txt
+getdirections.module
+
+commit 809cfff
+Author: Bob Hutchinson <hutch@midwales.net>
+Date:   Thu Feb 4 01:26:55 2010 +0000
+
+    general cleanup in preparation for stable release
+
+CHANGELOG.txt
+README.txt
+getdirections.admin.inc
+getdirections.info
+getdirections.install
+getdirections.js
+getdirections.module
+getdirections.theme.inc
+
+commit 8ecbd85
+Author: Bob Hutchinson <hutch@midwales.net>
+Date:   Wed Dec 2 18:26:32 2009 +0000
+
+    improved api_version
+
+CHANGELOG.txt
+getdirections.admin.inc
+getdirections.module
+
+commit c1bbb48
+Author: Bob Hutchinson <hutch@midwales.net>
+Date:   Sun Nov 29 14:36:44 2009 +0000
+
+    added info to README
+
+README.txt
+
+commit d714e05
+Author: Bob Hutchinson <hutch@midwales.net>
+Date:   Sun Nov 29 12:53:11 2009 +0000
+
+    improved location functionality
+
+CHANGELOG.txt
+README.txt
+getdirections.api.inc
+getdirections.css
+getdirections.js
+getdirections.module
+getdirections.theme.inc
+translations/getdirections-module.pot
+
+commit 17bcd8d
+Author: Bob Hutchinson <hutch@midwales.net>
+Date:   Fri Nov 27 22:30:11 2009 +0000
+
+    Initial commit of getdirections module
+
+CHANGELOG.txt
+README.txt
+getdirections.admin.inc
+getdirections.css
+getdirections.info
+getdirections.install
+getdirections.js
+getdirections.module
+translations/getdirections-module.pot

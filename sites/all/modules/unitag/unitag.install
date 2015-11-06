@@ -1,0 +1,109 @@
+<?php
+
+
+/**
+ * @file
+ * Installation, uninstallation and upgrade scripts for the unitag module.
+ */
+
+/**
+ * Implementation of hook_install().
+ */
+function unitag_install() {
+  drupal_install_schema('unitag');
+
+  $t = get_t();
+  drupal_set_message($t('Unitag module: Installation script complete.'));
+}
+
+/**
+ * Implementation of hook_schema().
+ */
+function unitag_schema() {
+  $schema['unitag'] = array(
+    'description' => 'Unitag module table: Store suggestions for free-tagging fields.',
+    'fields' => array(
+      'utid' => array(
+        'type' => 'serial',
+        'unsigned' => 1,
+        'not null' => TRUE,
+        'description' => 'The Unitag tag ID.'
+      ),
+      'nid' => array(
+        'type' => 'int',
+        'unsigned' => 1,
+        'not null' => TRUE,
+        'default' => 0,
+        'description' => 'Node ID.'
+      ),
+      'vid' => array(
+        'type' => 'int',
+        'unsigned' => 1,
+        'not null' => TRUE,
+        'default' => 0,
+        'description' => 'Vocabulary ID.'
+      ),
+      'name' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+        'description' => 'Suggestion string.'
+      ),
+      'basename' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+        'description' => 'Sanitised suggestion string for easy duplicate checking.'
+      ),
+      'blacklist' => array(
+        'type' => 'int',
+        'unsigned' => 1,
+        'not null' => TRUE,
+        'default' => 0,
+        'description' => 'Boolean to indicate if the term is blacklisted.'
+      )
+    ),
+    'indexes' => array(
+      'nid' => array('nid'),
+      'name' => array('name'),
+      'basename' => array('basename')
+    ),
+    'primary key' => array('utid')
+  );
+
+  return $schema;
+}
+
+/**
+ * Add column: blacklist. Add index: basename.
+ */
+function unitag_update_6000() {
+  $ret = array();
+
+  $blacklist = array(
+    'type' => 'int',
+    'unsigned' => 1,
+    'not null' => TRUE,
+    'default' => 0,
+    'description' => 'Boolean to indicate if the term is blacklisted.'
+  );
+  db_add_field($ret, 'unitag', 'blacklist', $blacklist);
+
+  db_add_index($ret, 'unitag', 'basename', array('basename'));
+
+  return $ret;
+}
+
+/**
+ * Implementation of hook_uninstall().
+ */
+function unitag_uninstall() {
+  drupal_uninstall_schema('unitag');
+
+  variable_del('unitag');
+
+  $t = get_t();
+  drupal_set_message($t('Unitag module: Uninstallation script complete.'));
+}

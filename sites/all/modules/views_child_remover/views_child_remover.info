@@ -1,0 +1,13 @@
+name = Views child remover
+description = remove book children from views
+core = 6.x
+depends = views
+package = Views
+
+
+; Information added by drupal.org packaging script on 2009-09-24
+version = "6.x-1.0"
+core = "6.x"
+project = "views_child_remover"
+datestamp = "1253785283"
+

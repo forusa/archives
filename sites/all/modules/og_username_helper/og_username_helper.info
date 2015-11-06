@@ -1,0 +1,12 @@
+name = Organic Groups Username Helper
+description = "A widget to add usernames in 'Add Members' and 'Send invitation' OG pages"
+package = "Organic groups"
+core = 6.x
+dependencies[] = og
+
+; Information added by drupal.org packaging script on 2011-07-11
+version = "6.x-1.2"
+core = "6.x"
+project = "og_username_helper"
+datestamp = "1310368321"
+

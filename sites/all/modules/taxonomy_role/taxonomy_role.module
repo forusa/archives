@@ -1,0 +1,140 @@
+<?php
+// $Id: 
+
+/**
+ * @file
+ * Taxonomy role - allows restriction of access to vocabularies  
+ */
+
+/**
+ * Implementation of hook_help().
+ */
+function taxonomy_role_help($path, $arg) {
+  switch ($path) {
+    case 'admin/help#taxonomy_role':      
+      $output = '<p>'. t('This module allows you to restrict access to vocabularies on node forms by role. Once it is installed, you will need to configure the permissions for new and existing vocabularies.'). '</p>'; 
+      return $output;
+  }
+}
+
+/**
+ * Implementation of hook_menu().
+ */
+function taxonomy_role_menu() {
+  $items = array();
+
+    $items['admin/settings/taxonomy_role'] = array(
+      'title' => t('Taxonomy Role'),
+      'page callback' => 'drupal_get_form',
+      'page arguments' => array('taxonomy_role_admin_settings_form'),
+      'access arguments' => array('administer site configuration'),
+      'description' => t('Configure Taxonomy Role settings.'),
+      'type' => MENU_NORMAL_ITEM,
+    );
+    
+  return $items;
+}
+
+/**
+ * Implementation of hook_form_alter().
+ */
+function taxonomy_role_form_alter(&$form, &$form_state, $form_id) { 
+  if (isset($form['type']) && $form['type']['#value'] .'_node_form' == $form_id) {
+    if (!empty($form['taxonomy']) && is_array($form['taxonomy'])) {
+      $visible = 0;
+      foreach (element_children($form['taxonomy']) as $vid) {
+        if (is_numeric($vid) && !_taxonomy_role_hide_vocabulary($form['taxonomy'][$vid], $vid)) {
+          $visible++;
+        }
+      }
+      if (!empty($form['taxonomy']['tags']) && is_array($form['taxonomy']['tags'])) {
+        foreach (element_children($form['taxonomy']['tags']) as $vid) {
+          if (is_numeric($vid) && !_taxonomy_role_hide_vocabulary($form['taxonomy']['tags'][$vid], $vid)) {
+            $visible++;
+          }
+        }
+      }
+      if ($visible <= 1) {
+        // Remove fieldset if it contains zero or one elements.
+        unset($form['taxonomy']['#type']);
+      }
+    }
+  }
+}
+
+/**
+ * Implementation of hook_perm().
+ */
+function taxonomy_role_perm() {
+  $vocabularies = taxonomy_get_vocabularies();
+  $perms = array();
+  foreach ($vocabularies as $vocabulary) {
+    $perms[] = _taxonomy_role_make_perm($vocabulary);
+  }
+  return $perms;
+}
+
+/**
+ * Administration page callback.
+ */
+function taxonomy_role_admin_settings_form() {
+  $vocabularies = taxonomy_get_vocabularies();
+  if (count($vocabularies)) {
+    $form['settings'] = array(
+      '#type' => 'fieldset',
+      '#collapsible' => FALSE,
+      '#title' => t('Vocabulary visibility'),
+      '#description' => t("When a user is denied access to a vocabulary, you can decide whether that vocabulary's field will be hidden or disabled. The latter allows users to see the terms."),
+    );
+    $options = array(
+      'hidden' => t('Hidden'),
+      'disabled' => t('Disabled'),
+    );
+    foreach ($vocabularies as $vid => $vocabulary) {
+      $form['settings']['taxonomy_role_'. $vid] = array(
+        '#type' => 'select',
+        '#title' => check_plain($vocabulary->name),
+        '#multiple' => FALSE,
+        '#required' => FALSE,
+        '#options' => $options,
+        '#default_value' => variable_get('taxonomy_role_'. $vid, 'hidden'),
+      );
+    }
+  }
+  return system_settings_form($form);
+}
+
+/**
+ * Returns the permission for a vocabulary.
+ */
+function _taxonomy_role_make_perm($vocabulary) {
+  // Strip anything that's not alphanumerical, '_', or '-'. Needed
+  // because the permissions page uses that string as an HTML id
+  // attribute.
+  $name = preg_replace('/[^A-Za-z0-9_\- ]/', '', $vocabulary->name);
+  return "access $name vocabulary";
+}
+
+/**
+ * Hides or disable a form element corresponding to a vocabulary,
+ * depending on permissions related to that vocabulary.
+ */
+function _taxonomy_role_hide_vocabulary(&$element, $vid) {
+  $vocabulary = taxonomy_vocabulary_load($vid);
+  if (!user_access(_taxonomy_role_make_perm($vocabulary))) {
+    if (variable_get('taxonomy_role_'. $vid, 'hidden') == 'hidden') {
+      $element = array(
+        '#type' => 'value',
+        '#value' => $element['#default_value'],
+      );
+      return TRUE; // Hidden.
+    }
+    else {
+      $element['#disabled'] = TRUE;
+      // Protect value from tampering (see http://drupal.org/node/426056#comment-2841748).
+      $element['#value'] = $element['#default_value'];
+    }
+  }
+  return FALSE;
+}
+
