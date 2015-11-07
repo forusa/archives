@@ -7,8 +7,18 @@ sites/*/files
 sites/*/private
 
 # Ignore Boost's static cache
-cache
 cache/*
+
+# Ignore build system files
+bower_components
+node_modules
+.sass-cache
+
+# Ignore file system remnants
+*.DS_Store
+Desktop.ini
+Thumbs.db
+.Trashes
 
 # If you prefer to store your .gitignore file in the sites/ folder, comment
 # or delete the previous settings and uncomment the following ones, instead.
