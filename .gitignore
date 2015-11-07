@@ -10,7 +10,6 @@ sites/*/private
 cache/*
 
 # Ignore build system files
-bower_components
 node_modules
 .sass-cache
 
