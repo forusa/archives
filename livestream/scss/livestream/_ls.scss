@@ -1,0 +1,59 @@
+
+
+
+// Top bar
+
+.top-bar.expanded {
+  background: $primary-color;
+}
+
+.top-bar-section ul li > a {
+  font-weight: bold;
+}
+
+// Mobile styles
+.logo {
+  max-width: 150px;
+}
+
+.menu-icon {
+  padding-top: 1.2rem;
+}
+
+// Larger screen styles
+@media only screen and (min-width: 40em) {
+  .logo {
+    position: absolute;
+    top: -1px;
+  }
+
+  .top-bar-section .left {
+    margin-left: 150px;
+  }
+}
+
+
+// Logo
+
+.logo__link {
+  display: inline-block;
+  vertical-align: top;
+  height: 50px;
+}
+
+.logo__svg {
+  height: 50px;
+  fill: $ghost;
+}
+
+
+// Livestream
+
+.livestream {
+  margin-top: 3rem;
+}
+
+.collapse {
+  font-size: 0.5em;
+  font-style: italic;
+}
