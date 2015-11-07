@@ -99,7 +99,7 @@ DirectoryIndex index.php
   ####################################################
   #  TEMPORARY LIVESTREAM REDIRECTION FROM HOME PAGE #
   ####################################################
-  RewriteRule ^$ http://www.example.com/ [R=301,L]
+  RewriteRule ^$ http://forusa.org/livestream/index.html [R=301,L]
 
   # Modify the RewriteBase if you are using Drupal in a subdirectory or in a
   # VirtualDocumentRoot and the rewrite rules are not working properly.
