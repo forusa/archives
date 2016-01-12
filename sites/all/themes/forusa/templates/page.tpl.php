@@ -52,10 +52,10 @@ if ($_GET["format"] == "simple") {
 
        // load the overlay
 
-       if (document.cookie.indexOf('grr_seen=true') == -1) {
-        var fifteenDays = 1000*60*60*24*15;
-        var expires = new Date((new Date()).valueOf() + fifteenDays);
-        document.cookie = "grr_seen=true;expires=" + expires.toUTCString();
+       if (document.cookie.indexOf('grr_overlay_seen=true') == -1) {
+        var expireOn = 1000*60*60*24*1; // last value is the number of days
+        var expires = new Date((new Date()).valueOf() + expireOn);
+        document.cookie = "grr_overlay_seen=true;expires=" + expires.toUTCString();
         $.colorbox({width:"580px", inline:true, href:"#splash-modal"});
       }
 
