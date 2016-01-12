@@ -56,10 +56,10 @@ if ($_GET["format"] == "simple") {
         var fifteenDays = 1000*60*60*24*15;
         var expires = new Date((new Date()).valueOf() + fifteenDays);
         document.cookie = "visited=true;expires=" + expires.toUTCString();
-        $.colorbox({width:"580px", inline:true, href:"#subscribe_popup"});
+        $.colorbox({width:"580px", inline:true, href:"#splash-modal"});
       }
 
-      $(".open_popup").colorbox({width:"580px", inline:true, href:"#subscribe_popup"});
+      $(".open_popup").colorbox({width:"580px", inline:true, href:"#splash-modal"});
     });
   </script>
   <!-- POPUP -->
@@ -209,21 +209,5 @@ dropdown.css is the dropdown css built into the Marinelli theme (for the primary
   </div>
 <!-- POPUP -->
 
-
-<!--[if !(lte IE 8)]><!-->
-   <script type="text/javascript">
-  var tdwfb_config = {
-    greeting: 'Dear Internet', // Sets the salutation at the top left
-    disableDate: false, // If true, the banner shows even if the date is not yet 02/11/2014
-    callOnly: true // If true, the banner only displays a form for calling congress
-  };
-  (function(){
-    var e = document.createElement('script'); e.type='text/javascript'; e.async = true;
-    e.src = document.location.protocol + '//d1agz031tafz8n.cloudfront.net/thedaywefightback.js/widget.min.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(e, s);
-  })();
-
-   </script>
-<!--<![endif]-->
 </body>
 </html>
