@@ -202,7 +202,7 @@ dropdown.css is the dropdown css built into the Marinelli theme (for the primary
   <div style="display:none">
     <div id="splash-modal">
       <h2 class="splash-modal__title">#GiveRefugeesRest</h2>
-      <p class="splash-modal__intro"><img src="http://forusa.org/sites/default/files/imagecache/250px-width/wysiwyg_imageupload/1/giverefugeesrest_450.jpg" width="250" height="167" class="splash-modal__image" />The anti-refugee and anti-Muslim rhetoric is out of control. Entire groups of human beings are being marginalized. This needs to stop immediately.</p>
+      <p class="splash-modal__intro"><img src="http://forusa.org/sites/default/files/imagecache/250px-width/wysiwyg_imageupload/1/giverefugeesrest_450.jpg" width="200" height="140" class="splash-modal__image" />Anti-refugee and anti-Muslim rhetoric is out of control. Entire groups of human beings are being marginalized. This needs to stop immediately.</p>
       <p class="splash-modal__button-wrap"><a href="/giverefugeesrest" title="Visit #GiveRefugeesRest and act now" class="splash-modal__button">Act now to #GiveRefugeesRest</a></p>
       <p class="splash-modal__footer"><em><a href="/blogs/for/fors-letter-governors-giverefugeesrest/13306">View the letter FOR sent to 31 governors at the launch of this campaign.</a></em></p>
     </div>
