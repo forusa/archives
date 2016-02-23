@@ -34,36 +34,7 @@ if ($_GET["format"] == "simple") {
     <link rel="stylesheet" type="text/css" href="<?php print base_path(). path_to_theme(); ?>/css/ie7.css" />
 <![endif]-->
 
-
-  <!-- POPUP -->
-  <link rel="stylesheet" type="text/css" href="<?php print base_path(). path_to_theme(); ?>/css/colorbox.css" />
-  <link rel="stylesheet" type="text/css" href="<?php print base_path(). path_to_theme(); ?>/css/popup.css" />
-  <!-- POPUP -->
-
-
   <?php print $scripts ?>
-
-
-  <!-- POPUP -->
-  <script language="javascript" src="<?php print base_path(). path_to_theme(); ?>/js/colorbox.js"></script>
-  <script>
-
-    $("document").ready(function (){
-
-       // load the overlay
-
-       if (document.cookie.indexOf('grr_overlay_seen=true') == -1) {
-        var expireOn = 1000*60*60*24*1; // last value is the number of days
-        var expires = new Date((new Date()).valueOf() + expireOn);
-        document.cookie = "grr_overlay_seen=true;expires=" + expires.toUTCString();
-        $.colorbox({width:"580px", inline:true, href:"#splash-modal"});
-      }
-
-      $(".open_popup").colorbox({width:"580px", inline:true, href:"#splash-modal"});
-    });
-  </script>
-  <!-- POPUP -->
-
 
 </head>
 
@@ -196,18 +167,6 @@ dropdown.css is the dropdown css built into the Marinelli theme (for the primary
 <?php print $footer_message ?>
 </div>
 <?php print $closure ?>
-
-
-<!-- POPUP -->
-  <div style="display:none">
-    <div id="splash-modal">
-      <h2 class="splash-modal__title">#GiveRefugeesRest</h2>
-      <p class="splash-modal__intro"><img src="http://forusa.org/sites/default/files/imagecache/250px-width/images/features/20160128-giverefugeesrest-end-islamophobia-welcome-refugees.jpg" width="200" height="125" class="splash-modal__image" />Anti-refugee and anti-Muslim rhetoric is out of control. Entire groups of human beings are being marginalized.<br /><br />This needs to stop immediately.</p>
-      <p class="splash-modal__button-wrap"><a href="/giverefugeesrest" title="Visit #GiveRefugeesRest and act now" class="splash-modal__button">Act now to #GiveRefugeesRest</a></p>
-      <p class="splash-modal__footer"><em><a href="/blogs/for/fors-letter-governors-giverefugeesrest/13306">View the letter FOR sent to 31 governors at the launch of this campaign.</a></em></p>
-    </div>
-  </div>
-<!-- POPUP -->
 
 </body>
 </html>
