@@ -587,6 +587,11 @@ a:hover, a:active { text-decoration: underline; }
   display: none;
 }
 
+#front-page-panel .view-all-blogs .views-field-body img.inline-image__right {
+  /* allows inline images added via insert if they are right-aligned */
+  display: inline;
+}
+
 #front-page-panel .view-all-blogs .views-field-name, #front-page-panel .view-all-blogs .views-field-tid, #front-page-panel .view-all-blogs .views-field-created, #front-page-panel .view-all-blogs .views-field-tid-1, #front-page-panel .view-all-blogs .views-field-group-nid {
   padding: 0.5em 0;
   color: #999;
