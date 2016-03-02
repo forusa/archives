@@ -1,1 +1,220 @@
-/* CK Editor core in-editor styles**  See custom styles and overrides at the bottom.*/.cke_editable{	/* Font */	font-family: sans-serif, Arial, Verdana, "Trebuchet MS";	font-size: 12px;	/* Text color */	color: #333;	/* Remove the background color to make it transparent */	background-color: #fff;	margin: 20px;	font-size: 13px;	line-height: 1.6;}.cke_editable blockquote{	font-style: italic;	font-family: Georgia, Times, "Times New Roman", serif;	padding: 2px 0;	border-style: solid;	border-color: #ccc;	border-width: 0;}.cke_contents_ltr blockquote{	padding-left: 20px;	padding-right: 8px;	border-left-width: 5px;}.cke_contents_rtl blockquote{	padding-left: 8px;	padding-right: 20px;	border-right-width: 5px;}a{	color: #0782C1;}.cke_editable ol,.cke_editable ul,.cke_editable dl{	/* IE7: reset rtl list margin. (#7334) */	*margin-right: 0px;	/* preserved spaces for list items with text direction other than the list. (#6249,#8049)*/	padding: 0 40px;}.cke_editable h1,.cke_editable h2,.cke_editable h3,.cke_editable h4,.cke_editable h5,.cke_editable h6{	font-weight: normal;	line-height: 1.2;}.cke_editable hr{	border: 0px;	border-top: 1px solid #ccc;}.cke_editable img.right{	border: 1px solid #ccc;	float: right;	margin-left: 15px;	padding: 5px;}.cke_editable img.left{	border: 1px solid #ccc;	float: left;	margin-right: 15px;	padding: 5px;}.cke_editable pre{	white-space: pre-wrap; /* CSS 2.1 */	word-wrap: break-word; /* IE7 */	-moz-tab-size: 4;	-o-tab-size: 4;	-webkit-tab-size: 4;	tab-size: 4;}.cke_editable .marker{	background-color: Yellow;}.cke_editable span[lang]{	font-style: italic;}.cke_editable figure{	text-align: center;	border: solid 1px #ccc;	border-radius: 2px;	background: rgba(0,0,0,0.05);	padding: 10px;	margin: 10px 20px;	display: inline-block;}.cke_editable figure > figcaption{	text-align: center;	display: block; /* For IE8 */}.cke_editable a > img {	padding: 1px;	margin: 1px;	border: none;	outline: 1px solid #0782C1;}/* Styles loaded into the rich text editor (CK Editor) under the "font style" drop-down. * Note: These styles MUST be explicitly listed and named in the CSS > CSS Classes box at * http://forusa.org/admin/settings/wysiwyg/profile/2/edit * * Only CSS classes can be used (no IDs). To prevent collisions with other styles, all classes * should be prefixed with "wysiwyg-" * * When listing the classes in the WYSIWYG profile configuration, you must prefix the class * with a specific HTML tag, even if it is not so prefixed below. In other words, you must * use classes like h3.wysiwyg-sample, p.wysiwyg-sample, or span.wysiwyg-sample, even if the * class is defined below simply as .wysiwyg-sample. */.wysiwyg-donate,#primary .wysiwyg-donate,.cke_editable .wysiwyg-donate {  padding: 0.25em 0.5em 0.25em 30px;  font-size: 1.1em;  background: #d7dbee url(../images/fordove-icon_25.png) 2px 50% no-repeat;}.inline-image__right,#primary .inline-image__right,.cke_editable .inline-image__right {	float: right;  margin: 0 0 1em 1em;}.inline-image__left,#primary .inline-image__left,.cke_editable .inline-image__left {  float: left;  margin: 0 1em 1em 0;}.inline-image__center,#primary .inline-image__center,.cke_editable .inline-image__center {  display: block;  margin: 1em auto;}/* Hide inserted images for now until we're ready */.node-type-blog #primary .singlepage .inline-image__left,.node-type-blog #primary .singlepage .inline-image__right,.node-type-blog #primary .singlepage .inline-image__center {	display: none;}/* CKEditor in-editor overrides */.cke_editable {	font-family: "Lucida Grande","Lucida Sans Unicode",helvetica,verdana,arial,sans-serif;}.cke_editable a {  color: #054b81;}.cke_editable h3,.cke_editable h4,.cke_editable h5,.cke_editable h6 {  font-family: Georgia,"Times New Roman",Times,serif;  line-height: 1.2em;}.cke_editable h3 {  color: #054b81;  font-size: 1.5em;  font-style: italic;  font-weight: bold;}.cke_editable h4 {  color: #054b81;  font-size: 1.5em;  font-style: italic;}.cke_editable h5 {  font-size: 1.25em;  font-weight: bold;  text-transform: uppercase;}.cke_editable h6 {  font-size: 1.1em;  font-style: italic;  text-transform: uppercase;}.cke_editable hr {  background: none repeat scroll 0 0 #5294c1;}
+/* CK Editor core in-editor styles
+*
+*  See custom styles and overrides at the bottom.
+*/
+
+.cke_editable
+{
+	/* Font */
+	font-family: sans-serif, Arial, Verdana, "Trebuchet MS";
+	font-size: 12px;
+
+	/* Text color */
+	color: #333;
+
+	/* Remove the background color to make it transparent */
+	background-color: #fff;
+
+	margin: 20px;
+
+	font-size: 13px;
+	line-height: 1.6;
+}
+
+.cke_editable blockquote
+{
+	font-style: italic;
+	font-family: Georgia, Times, "Times New Roman", serif;
+	padding: 2px 0;
+	border-style: solid;
+	border-color: #ccc;
+	border-width: 0;
+}
+
+.cke_contents_ltr blockquote
+{
+	padding-left: 20px;
+	padding-right: 8px;
+	border-left-width: 5px;
+}
+
+.cke_contents_rtl blockquote
+{
+	padding-left: 8px;
+	padding-right: 20px;
+	border-right-width: 5px;
+}
+
+a
+{
+	color: #0782C1;
+}
+
+.cke_editable ol,.cke_editable ul,.cke_editable dl
+{
+	/* IE7: reset rtl list margin. (#7334) */
+	*margin-right: 0px;
+	/* preserved spaces for list items with text direction other than the list. (#6249,#8049)*/
+	padding: 0 40px;
+}
+
+.cke_editable h1,.cke_editable h2,.cke_editable h3,.cke_editable h4,.cke_editable h5,.cke_editable h6
+{
+	font-weight: normal;
+	line-height: 1.2;
+}
+
+.cke_editable hr
+{
+	border: 0px;
+	border-top: 1px solid #ccc;
+}
+
+.cke_editable img.right
+{
+	border: 1px solid #ccc;
+	float: right;
+	margin-left: 15px;
+	padding: 5px;
+}
+
+.cke_editable img.left
+{
+	border: 1px solid #ccc;
+	float: left;
+	margin-right: 15px;
+	padding: 5px;
+}
+
+.cke_editable pre
+{
+	white-space: pre-wrap; /* CSS 2.1 */
+	word-wrap: break-word; /* IE7 */
+	-moz-tab-size: 4;
+	-o-tab-size: 4;
+	-webkit-tab-size: 4;
+	tab-size: 4;
+}
+
+.cke_editable .marker
+{
+	background-color: Yellow;
+}
+
+.cke_editable span[lang]
+{
+	font-style: italic;
+}
+
+.cke_editable figure
+{
+	text-align: center;
+	border: solid 1px #ccc;
+	border-radius: 2px;
+	background: rgba(0,0,0,0.05);
+	padding: 10px;
+	margin: 10px 20px;
+	display: inline-block;
+}
+
+.cke_editable figure > figcaption
+{
+	text-align: center;
+	display: block; /* For IE8 */
+}
+
+.cke_editable a > img {
+	padding: 1px;
+	margin: 1px;
+	border: none;
+	outline: 1px solid #0782C1;
+}
+
+/* Styles loaded into the rich text editor (CK Editor) under the "font style" drop-down.
+ * Note: These styles MUST be explicitly listed and named in the CSS > CSS Classes box at
+ * http://forusa.org/admin/settings/wysiwyg/profile/2/edit
+ *
+ * Only CSS classes can be used (no IDs). To prevent collisions with other styles, all classes
+ * should be prefixed with "wysiwyg-"
+ *
+ * When listing the classes in the WYSIWYG profile configuration, you must prefix the class
+ * with a specific HTML tag, even if it is not so prefixed below. In other words, you must
+ * use classes like h3.wysiwyg-sample, p.wysiwyg-sample, or span.wysiwyg-sample, even if the
+ * class is defined below simply as .wysiwyg-sample.
+ */
+
+.wysiwyg-donate,
+#primary .wysiwyg-donate,
+.cke_editable .wysiwyg-donate {
+  padding: 0.25em 0.5em 0.25em 30px;
+  font-size: 1.1em;
+  background: #d7dbee url('../images/fordove-icon_25.png') 2px 50% no-repeat;
+}
+
+.inline-image__right,
+#primary .inline-image__right,
+.cke_editable .inline-image__right {
+	float: right;
+  margin: 0 0 1em 1em;
+}
+
+.inline-image__left,
+#primary .inline-image__left,
+.cke_editable .inline-image__left {
+  float: left;
+  margin: 0 1em 1em 0;
+}
+
+.inline-image__center,
+#primary .inline-image__center,
+.cke_editable .inline-image__center {
+  display: block;
+  margin: 1em auto;
+}
+
+/* CKEditor in-editor overrides */
+
+.cke_editable {
+	font-family: "Lucida Grande","Lucida Sans Unicode",helvetica,verdana,arial,sans-serif;
+}
+
+.cke_editable a {
+  color: #054b81;
+}
+
+.cke_editable h3,
+.cke_editable h4,
+.cke_editable h5,
+.cke_editable h6 {
+  font-family: Georgia,"Times New Roman",Times,serif;
+  line-height: 1.2em;
+}
+
+.cke_editable h3 {
+  color: #054b81;
+  font-size: 1.5em;
+  font-style: italic;
+  font-weight: bold;
+}
+
+.cke_editable h4 {
+  color: #054b81;
+  font-size: 1.5em;
+  font-style: italic;
+}
+
+.cke_editable h5 {
+  font-size: 1.25em;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.cke_editable h6 {
+  font-size: 1.1em;
+  font-style: italic;
+  text-transform: uppercase;
+}
+
+.cke_editable hr {
+  background: none repeat scroll 0 0 #5294c1;
+}
