@@ -12,6 +12,7 @@ cache/*
 # Ignore build system files
 node_modules
 .sass-cache
+npm-debug.log
 
 # Ignore file system remnants
 *.DS_Store
