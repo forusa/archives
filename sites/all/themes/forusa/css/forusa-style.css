@@ -579,7 +579,16 @@ a:hover, a:active { text-decoration: underline; }
 
 #front-page-panel .view-all-blogs .views-field-view-node a:hover, #front-page-panel .view-all-blogs .views-field-view-node a:active { background-color: #ddf; }
 
-#front-page-panel .view-all-blogs .accordion-content { padding: 1em; }
+#front-page-panel .view-all-blogs .accordion-content {
+  padding: 1em;
+}
+
+/* clearfix */
+#front-page-panel .view-all-blogs .accordion-content:after {
+  content: "";
+  display: table;
+  clear: both;
+}
 
 #front-page-panel .view-all-blogs .views-field-body img,
 #front-page-panel .view-all-blogs .views-field-body .wysiwyg_imageupload {
