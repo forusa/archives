@@ -6,7 +6,14 @@
  */
 
 /**
- * Implementation of hook_enable().
+ * Implements hook_install().
+ */
+function advagg_bundler_install() {
+  drupal_install_schema('advagg_bundler');
+}
+
+/**
+ * Implements hook_enable().
  */
 function advagg_bundler_enable() {
   // Flush advagg caches.
@@ -17,7 +24,7 @@ function advagg_bundler_enable() {
 }
 
 /**
- * Implementation of hook_disable().
+ * Implements hook_disable().
  */
 function advagg_bundler_disable() {
   // Flush advagg caches.
@@ -36,6 +43,8 @@ function advagg_bundler_uninstall() {
   variable_del('advagg_bundler_max_css');
   variable_del('advagg_bundler_max_js');
   variable_del('advagg_bundler_active');
+
+  drupal_uninstall_schema('advagg_bundler');
 }
 
 /**
@@ -50,3 +59,41 @@ function advagg_bundler_requirements($phase) {
   }
   return $requirements;
 }
+
+/**
+ * Implements hook_schema().
+ */
+function advagg_bundler_schema() {
+  $schema['advagg_bundler_selector_count'] = array(
+    'description' => 'Keep track of when the files were modified.',
+    'fields' => array(
+      'filename' => array(
+        'description' => 'Path of the file relative to Drupal webroot.',
+        'type' => 'text',
+        'size' => 'normal',
+        'not null' => TRUE,
+      ),
+      'filename_md5' => array(
+        'description' => 'MD5 hash of filename',
+        'type' => 'varchar',
+        'length' => 32,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'selector_count' => array(
+        'description' => 'CSS selector count of the file.',
+        'type' => 'int',
+        'not null' => TRUE,
+      ),
+      'timestamp' => array(
+        'description' => 'Last modified timestamp of the file.',
+        'type' => 'int',
+        'not null' => TRUE,
+      ),
+    ),
+    'primary key' => array('filename_md5'),
+  );
+
+  return $schema;
+}
+

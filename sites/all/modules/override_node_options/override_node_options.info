@@ -3,9 +3,9 @@ description = "Allow non-admins to override the default publishing options for n
 core = 6.x
 package = Permissions
 
-; Information added by Drupal.org packaging script on 2014-09-19
-version = "6.x-1.13"
+; Information added by Drupal.org packaging script on 2014-12-27
+version = "6.x-1.14"
 core = "6.x"
 project = "override_node_options"
-datestamp = "1411157931"
+datestamp = "1419642181"
 

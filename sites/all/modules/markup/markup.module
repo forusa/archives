@@ -6,7 +6,7 @@
  */
 
 /**
- * Implementation of hook_field_info().
+ * Implements hook_field_info().
  */
 function markup_field_info() {
   return array(
@@ -15,7 +15,7 @@ function markup_field_info() {
 }
 
 /**
- * Implementation of hook_field_settings().
+ * Implements hook_field_settings().
  */
 function markup_field_settings($op, $field) {
   switch ($op) {
@@ -71,7 +71,7 @@ function markup_field_settings($op, $field) {
 }
 
 /**
- * Implementation of hook_widget_info().
+ * Implements hook_widget_info().
  */
 function markup_widget_info() {
   return array(
@@ -84,7 +84,7 @@ function markup_widget_info() {
 }
 
 /**
- * Implementation of hook_widget_settings().
+ * Implements hook_widget_settings().
  */
 function markup_widget_settings($op, $widget) {
   switch ($op) {
@@ -115,7 +115,7 @@ function markup_widget_settings($op, $widget) {
 }
 
 /**
- * Implementation of FAPI hook_elements().
+ * Implements hook FAPI hook_elements().
  *
  * Any FAPI callbacks needed for individual widgets can be declared here,
  * and the element will be passed to those callbacks for processing.
@@ -137,7 +137,7 @@ function markup_elements() {
 }
 
 /**
- * Implementation of hook_theme().
+ * Implements hook_theme().
  */
 function markup_theme() {
   return array(
@@ -151,21 +151,21 @@ function markup_theme() {
 }
 
 /**
- * Implementation of hook_content_multigroup_allowed_widgets().
+ * Implements hook_content_multigroup_allowed_widgets().
  */
 function markup_content_multigroup_allowed_widgets() {
   return array('markup');
 }
 
 /**
- * Implementation of hook_content_multigroup_no_remove_widgets().
+ * Implements hook_content_multigroup_no_remove_widgets().
  */
 function markup_content_multigroup_no_remove_widgets() {
   return array('markup');
 }
 
 /**
- * Implementation of hook_widget().
+ * Implements hook_widget().
  */
 function markup_widget(&$form, &$form_state, $field, $items, $delta = 0) {
   $element = array(
@@ -243,9 +243,8 @@ function markup_widget_process($element, $edit, $form_state, $form) {
  * The $fields array is in $form['#field_info'][$element['#field_name']].
  */
 function markup_element_process($element, $edit, $form_state, $form) {
-  $output = '';
   // Find out which display_style we are using and whether we need to hide the
-  // title and/or wrapper.
+  // Title and/or wrapper.
   switch ($element['#display_style']) {
     case 'all':
       break;
@@ -261,7 +260,6 @@ function markup_element_process($element, $edit, $form_state, $form) {
       break;
   }
 
-  
   return $element;
 }
 
@@ -305,7 +303,7 @@ function markup_eval($code, $arguments = array()) {
 }
 
 /**
- * Implementation of hook_form_alter().
+ * Implements hook_form_alter().
  */
 function markup_form_alter(&$form, $form_state, $form_id) {
   if ($form_id == 'content_field_edit_form' && $form['module']['#value'] == 'markup') {
@@ -319,7 +317,7 @@ function markup_form_alter(&$form, $form_state, $form_id) {
 }
 
 /**
- * Implementation of cck hook_content_is_empty().
+ * Implements hook cck hook_content_is_empty().
  */
 function markup_content_is_empty($item, $field) {
   return TRUE;

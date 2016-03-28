@@ -11,7 +11,6 @@
  * and calculates a new valus for each of them. this is only a fallback because reliable image toolkit 
  * transparencies was buggy on certain platforms :(
  * 
- * DOES NOT WORK WELL on indexed color yet (GIFs)
  */
 
 //Niko (http://www.codeguru.com.ua)

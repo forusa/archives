@@ -326,10 +326,16 @@ function advagg_check_missing_handler() {
   // Setup request
   list($css_path, $js_path) = advagg_get_root_files_dir();
   $url = _advagg_build_url($css_path . $filepath . '.css');
+  $htauth_user = variable_get('advagg_async_test_username', '');
+  $htauth_pass = variable_get('advagg_async_test_password', '');
   $headers = array(
     'Host' => $_SERVER['HTTP_HOST'],
     'Connection' => 'close',
   );
+  if ($htauth_user && $htauth_pass) {
+    $headers['Authorization'] = 'Basic ' . base64_encode($htauth_user . ':' . $htauth_pass);
+  }
+
 
   // Check that the menu router handler is working. If it's not working the rest
   // of the tests are pointless.
@@ -898,7 +904,7 @@ function advagg_update_6108() {
       af.filetype
     FROM {advagg_bundles} AS ab
     INNER JOIN {advagg_files} AS af USING ( filename_md5 )
-    GROUP BY bundle_md5");
+    GROUP BY bundle_md5 , ab.counter, af.filetype");
   while ($row = db_fetch_array($results)) {
     $filename = advagg_build_filename($row['filetype'], $row['bundle_md5'], $row['counter']);
     if ($row['filetype'] == 'css') {

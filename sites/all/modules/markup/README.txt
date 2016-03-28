@@ -12,10 +12,10 @@ created, and utilizes form_alter to remove unnecessary fields from the
 
 Maintainers
 ----------------
-smoothify - http://drupal.org/user/115335
-ebeyrent - http://drupal.org/user/23897
-cYU  -  http://drupal.org/user/202205
-
+mqanneh   - https://www.drupal.org/user/2833163
+smoothify  - https://www.drupal.org/user/115335
+ebeyrent   - https://www.drupal.org/user/23897
+cYU           - https://www.drupal.org/user/202205
 
 Install
 -------
@@ -45,4 +45,3 @@ Support
 -------
 Check the issue queue of this module for more information:
 http://drupal.org/project/issues/markup
-

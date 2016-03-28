@@ -1,5 +1,5 @@
 <?php
-// $Id$
+// $Id: jquery_ui_dialog.api.inc,v 1.1.2.9 2010/07/10 08:05:55 eugenmayer Exp $
 # Copyright (c) 2010 Impressive.media
 # Author: Eugen Mayer
 

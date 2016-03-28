@@ -6,7 +6,7 @@
  */
 
 /**
- * Implementation of hook_field_info().
+ * Implements hook_field_info().
  */
 function markup_view_field_info() {
   return array(
@@ -15,7 +15,7 @@ function markup_view_field_info() {
 }
 
 /**
- * Implementation of hook_field_settings().
+ * Implements hook_field_settings().
  */
 function markup_view_field_settings($op, $field) {
   switch ($op) {
@@ -43,7 +43,7 @@ function markup_view_field_settings($op, $field) {
         '#required' => FALSE,
         '#description' => t('Provide a comma separated list of arguments to pass to the view. If an argument contains commas or double quotes, enclose it in double quotes. Replace double quotes that are part of the argument with pairs of double quotes.'),
       );
-      
+
       return $form;
 
     case 'validate':
@@ -51,14 +51,14 @@ function markup_view_field_settings($op, $field) {
 
     case 'save':
       return array('view', 'view_args');
-    
+
     case 'database columns':
       return array();
   }
 }
 
 /**
- * Implementation of hook_widget_info().
+ * Implements hook_widget_info().
  */
 function markup_view_widget_info() {
   return array(
@@ -71,7 +71,7 @@ function markup_view_widget_info() {
 }
 
 /**
- * Implementation of hook_widget_settings().
+ * Implements hook_widget_settings().
  */
 function markup_view_widget_settings($op, $widget) {
   switch ($op) {
@@ -88,10 +88,10 @@ function markup_view_widget_settings($op, $widget) {
           'all' => t('Display Field Wrapper & Label'),
         ),
         '#required' => TRUE,
-        '#description' => 
-          t('Choose how the markup_view field should be displayed on the node form.') .
-          '<br />' .
-          htmlentities(t('A field wrapper consists of a <div class="form-item"></div> wrapper around the markup_view to follow form standards.')),
+        '#description' =>
+        t('Choose how the markup_view field should be displayed on the node form.') .
+        '<br />' .
+        htmlentities(t('A field wrapper consists of a <div class="form-item"></div> wrapper around the markup_view to follow form standards.')),
       );
 
       $form['use_view_title'] = array(
@@ -109,7 +109,7 @@ function markup_view_widget_settings($op, $widget) {
 }
 
 /**
- * Implementation of FAPI hook_elements().
+ * Implements FAPI hook_elements().
  *
  * Any FAPI callbacks needed for individual widgets can be declared here,
  * and the element will be passed to those callbacks for processing.
@@ -127,7 +127,7 @@ function markup_view_elements() {
 }
 
 /**
- * Implementation of hook_theme().
+ * Implements hook_theme().
  */
 function markup_view_theme() {
   return array(
@@ -138,21 +138,21 @@ function markup_view_theme() {
 }
 
 /**
- * Implementation of hook_content_multigroup_allowed_widgets().
+ * Implements hook_content_multigroup_allowed_widgets().
  */
 function markup_view_content_multigroup_allowed_widgets() {
   return array('markup_view');
 }
 
 /**
- * Implementation of hook_content_multigroup_no_remove_widgets().
+ * Implements hook_content_multigroup_no_remove_widgets().
  */
 function markup_view_content_multigroup_no_remove_widgets() {
   return array('markup_view');
 }
 
 /**
- * Implementation of hook_widget().
+ * Implements hook_widget().
  */
 function markup_view_widget(&$form, &$form_state, $field, $items, $delta = 0) {
   $element = array(
@@ -189,17 +189,17 @@ function markup_view_process($element, $edit, $form_state, $form) {
   }
 
   // Retrieve view object.
-  $view = views_get_view($view_name);   
+  $view = views_get_view($view_name);
 
-  
   if ($view && $view->access($display_id)) {
     $args = markup_view_get_arguments($element, $field, $form_state, $form);
-    
+
     $view->set_display($display_id);
     if (!empty($args) && is_array($args)) {
       $view->set_arguments($args);
     }
-    // We don't want to be able to navigate away from the form so set ajax to be on
+    // We don't want to be able to navigate away from the form so set ajax to
+    // be on.
     // This should be configurable and perhaps should carry a warning.
     $view->display_handler->set_option('use_ajax', 1);
     $markup = $view->preview();
@@ -224,7 +224,7 @@ function markup_view_process($element, $edit, $form_state, $form) {
 }
 
 /**
- * Implementation of hook_form_alter().
+ * Implements hook_form_alter().
  */
 function markup_view_form_alter(&$form, $form_state, $form_id) {
   if ($form_id == 'content_field_edit_form' && $form['module']['#value'] == 'markup_view') {
@@ -238,7 +238,7 @@ function markup_view_form_alter(&$form, $form_state, $form_id) {
 }
 
 /**
- * Implementation of cck hook_content_is_empty().
+ * Implements cck hook_content_is_empty().
  */
 function markup_view_content_is_empty($item, $field) {
   return TRUE;
@@ -246,11 +246,12 @@ function markup_view_content_is_empty($item, $field) {
 
 /**
  * Retrieves a list of arguments for the view, using a callback function if set.
- * 
+ *
  * @param array $element
  * @param array $field
  * @param array $form_state
- * @return array
+ *
+ * @return array $args
  */
 function markup_view_get_arguments($element, $field, $form_state, $form) {
   $args = array();
@@ -266,16 +267,14 @@ function markup_view_get_arguments($element, $field, $form_state, $form) {
       }
     }
   }
-  
+
   if (!$valid_callback && !empty($field['view_args'])) {
     $args = explode(',', $field['view_args']);
   }
   return $args;
 }
 
-/**
- * Gets a list of potential views, and returns data as an array
- */
+// Gets a list of potential views, and returns data as an array.
 function markup_view_get_list_of_views() {
   static $views = array();
   if (!empty($views)) {
@@ -283,11 +282,11 @@ function markup_view_get_list_of_views() {
   }
   $all_views = views_get_all_views();
   $views[''] = t('None');
-  foreach ((array)$all_views as $view_name => $view) {
-    foreach ((array)$view->display as $display_key => $display) {
+  foreach ((array) $all_views as $view_name => $view) {
+    foreach ((array) $view->display as $display_key => $display) {
       $title = ucfirst($view_name) . ' - ' . $display->display_title;
-      // Build return array
-      $views[$view_name . '|' . $display->id] = $title;     
+      // Build return array.
+      $views[$view_name . '|' . $display->id] = $title;
     }
   }
   return $views;
@@ -295,9 +294,7 @@ function markup_view_get_list_of_views() {
 
 /**
  * FAPI theme for an individual elements.
- *
  */
-
 function theme_markup_view($element) {
   return $element['#children'];
 }

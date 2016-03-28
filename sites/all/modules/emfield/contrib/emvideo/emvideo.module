@@ -684,8 +684,8 @@ function emvideo_handler_arg_provider($op, &$query, $argtype, $arg = '') {
  */
 function emvideo_modal($node, $width, $height, $field_name, $provider, $code, $extra = NULL) {
   $field = content_fields($field_name);
-  $field['widget']['video_width'] = $width;
-  $field['widget']['video_height'] = $height;
+  $field['widget']['video_width'] = (int) $width;
+  $field['widget']['video_height'] = (int) $height;
   $field['widget']['video_autoplay'] = 1;
 
   // Respect any field access permissions.

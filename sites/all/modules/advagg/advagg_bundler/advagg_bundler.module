@@ -31,6 +31,11 @@ define('ADVAGG_BUNDLER_OUTDATED', 1209600);
 define('ADVAGG_BUNDLER_ACTIVE', TRUE);
 
 /**
+ * CSS selector limit in a single stylesheet on IE9 and below.
+ */
+define('SELECTOR_SPLIT_VALUE', 4095);
+
+/**
  * Implementation of hook_menu
  */
 function advagg_bundler_menu() {
@@ -58,7 +63,6 @@ function advagg_bundler_advagg_filenames_alter(&$filenames) {
   // Get max number of sub aggregates to create.
   $max_css = variable_get('advagg_bundler_max_css', ADVAGG_BUNDLER_MAX_CSS);
   $max_js = variable_get('advagg_bundler_max_js', ADVAGG_BUNDLER_MAX_JS);
-  $schema = advagg_get_server_schema();
 
   $output = array();
   foreach ($filenames as $values) {
@@ -66,7 +70,7 @@ function advagg_bundler_advagg_filenames_alter(&$filenames) {
     $filetype = $values['filetype'];
     $files = $values['files'];
     $bundle_md5 = $values['bundle_md5'];
-    $cached_data_key = 'bundler_' . $schema . '_' . $bundle_md5;
+    $cached_data_key = 'bundler_' . $bundle_md5;
 
     // Try cache first; cache table is cache_advagg_bundle_reuse.
     $cached_data = advagg_cached_bundle_get($cached_data_key, 'advagg_bundler_filenames_alter');
@@ -131,7 +135,7 @@ function advagg_bundler_advagg_filenames_alter(&$filenames) {
 
     // Make sure we didn't go over the max; if we did merge the smallest bundles
     // together.
-    advagg_bundler_merge($groupings, $max);
+    advagg_bundler_merge($groupings, $max, $filetype);
 
     // If only one group then don't do any more processing. The merge algorithm
     // could have reduce the groupings down to one.
@@ -146,7 +150,7 @@ function advagg_bundler_advagg_filenames_alter(&$filenames) {
     $data = array();
     foreach ($groupings as $bundle) {
       $values['files'] = $bundle;
-      $values['bundle_md5'] = md5($schema . implode('', $bundle));
+      $values['bundle_md5'] = md5(implode('', $bundle));
       $data[] = $values;
       $output[] = $values;
     }
@@ -196,7 +200,7 @@ function advagg_bundler_analysis($filename = '', $force = FALSE) {
           filename
         FROM (
           SELECT
-            LPAD(CAST(COUNT(*) AS char(8)), 8, '0') AS count,
+            LPAD(COUNT(*), 8, '00000000') AS count,
             bundle_md5,
             filename_md5
           FROM
@@ -252,7 +256,7 @@ function advagg_bundler_analysis($filename = '', $force = FALSE) {
  * @param $max
  *   max number of grouping
  */
-function advagg_bundler_merge(&$groupings, $max) {
+function advagg_bundler_merge(&$groupings, $max, $filetype) {
   $group_count = count($groupings);
 
   if (!empty($max)) {
@@ -304,9 +308,7 @@ function advagg_bundler_merge(&$groupings, $max) {
         }
       }
 
-//       watchdog('debug', $first . "<br>\n" . $last . "<br>\n" . str_replace('    ', '&nbsp;&nbsp;&nbsp;&nbsp;', nl2br(htmlentities(print_r(array($groupings, $map, $counts), TRUE)))));
-
-      // Create the new merged set
+      // Create the new merged set.
       $a = $groupings[$first];
       $b = $groupings[$last];
       $new_set = array_merge($a, $b);
@@ -374,6 +376,98 @@ function advagg_bundler_merge(&$groupings, $max) {
     $groupings[$merge_candidate_key] = $new_set;
   }
 
-  // Output Debugging info to watchdog.
-  // watchdog('debug', str_replace('    ', '&nbsp;&nbsp;&nbsp;&nbsp;', nl2br(htmlentities(print_r($groupings, TRUE)))));
+  // Prevent CSS selectors exceeding 4095 due to limits with IE9 and below.
+  if ($filetype == 'css') {
+
+    // Check each group to see if it exceeds the selector limit.
+    do {
+      $groupings_edited = FALSE;
+      foreach ($groupings as $key => $group) {
+
+        // Restart the selector limit check if the grouping was edited.
+        if ($groupings_edited) {
+          break;
+        }
+
+        $group_selector_counter = 0;
+
+        $selector_counts = advagg_bundler_get_css_selector_count($group);
+
+        for ($i = 0; $i < count($group) && !$groupings_edited; $i++) {
+
+          $selector_count = isset($selector_counts[$group[$i]]) ? $selector_counts[$group[$i]] : 0;
+
+          if ($group_selector_counter + $selector_count > SELECTOR_SPLIT_VALUE) {
+            $groupings_edited = TRUE;
+
+            // Divide the group.
+            $first_group = array_splice($group, 0, $i);
+            $second_group = array_splice($group, 0);
+
+            // Rebuild the array with the new set in the correct place.
+            $new_groupings = array();
+            foreach ($groupings as $k => $files) {
+              if ($k == $key) {
+                $new_groupings[$k . '_1'] = $first_group;
+                $new_groupings[$k . '_2'] = $second_group;
+              }
+              else {
+                $new_groupings[$k] = $files;
+              }
+            }
+            $groupings = $new_groupings;
+          }
+          else {
+            $group_selector_counter += $selector_count;
+          }
+        }
+      }
+    } while ($groupings_edited);
+  }
+}
+
+/**
+ * Gets the selector count of the provided files.
+ *
+ * @param array $files
+ *   Array of files to use.
+ *
+ * @return array
+ *   The selector counts of each file.
+ */
+function advagg_bundler_get_css_selector_count($files) {
+  $results = array();
+  $placeholders = db_placeholders($files);
+  $result  = db_query("SELECT filename, selector_count, timestamp FROM {advagg_bundler_selector_count} WHERE filename IN ($placeholders)", $files);
+
+  while ($row = db_fetch_array($result)) {
+    $modified = filemtime($row['filename']);
+    if ($modified > $row['timestamp']) {
+      $css = advagg_build_css_bundle(array($row['filename']), TRUE);
+
+      // Get the number of selectors.
+      // http://stackoverflow.com/questions/12567000/regex-matching-for-counting-css-selectors/12567381#12567381
+      $selector_count = preg_match_all('/\{.+?\}|,/s', $css, $matched);
+
+      db_query("UPDATE {advagg_bundler_selector_count} SET timestamp = %d, selector_count = %d WHERE filename LIKE '%s'", $modified, $selector_count, $row['filename']);
+
+      $results[$row['filename']] = $selector_count;
+    }
+    else {
+      $results[$row['filename']] = $row['selector_count'];
+    }
+  }
+
+  foreach ($files as $file) {
+    if (!isset($results[$file]) && file_exists($file)) {
+      $css = advagg_build_css_bundle(array($file), TRUE);
+      $selector_count = preg_match_all('/\{.+?\}|,/s', $css, $matched);
+
+      db_query("INSERT INTO {advagg_bundler_selector_count} VALUES('%s', '%s', %d, %d)", $file, md5($file), $selector_count, filemtime($file));
+
+      $results[$file] = $selector_count;
+    }
+  }
+
+  return $results;
 }

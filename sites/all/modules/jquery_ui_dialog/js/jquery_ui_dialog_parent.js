@@ -1,4 +1,4 @@
-// $Id:$
+// $Id: jquery_ui_dialog_parent.js,v 1.1.2.13 2010/07/10 08:05:55 eugenmayer Exp $
 (function ($) {
   Drupal.jqui_dialog = Drupal.jqui_dialog || {
     options: {},

@@ -5,11 +5,6 @@
 
 /**
  * Implementation of hook_filter().
- * @param $op
- * @param int $delta
- * @param $format
- * @param string $text
- * @return array,string
  */
 function wysiwyg_imageupload_filter($op, $delta = 0, $format = -1, $text = '') {
   switch ($op) {
@@ -39,8 +34,6 @@ function _wysiwyg_imageupload_filter_pattern() {
 
 /**
  * Finds all the occurences of a inline image tag
- * @param $body
- * @return string
  */
 function _wysiwyg_imageupload_filter_process(&$body) {
   // Syntax: [[inlineimage:<iid>:<inlineargs>]]
@@ -50,9 +43,6 @@ function _wysiwyg_imageupload_filter_process(&$body) {
 
 /**
  * returns a rendered(html) image for the tag
- * @param $iid
- * @param $arguments
- * @return string
  */
 function _wysiwyg_imageupload_render_nodeview($iid, $arguments) {
   $arguments = _wysiwyg_imageupload_unserialize_arguments(urldecode($arguments));
@@ -63,8 +53,6 @@ function _wysiwyg_imageupload_render_nodeview($iid, $arguments) {
 
 /**
  * Loads the comma seperated argument list into an array
- * @param $arguments
- * @return array
  */
 function _wysiwyg_imageupload_unserialize_arguments($arguments) {
     // Argument syntax: key=value,key=value,key=value

@@ -163,10 +163,15 @@ function advagg_admin_info_form() {
 
   $filepath = $css_path . '/css_missing' . mt_rand() . time() . '_0.css';
   $url = _advagg_build_url($filepath);
+  $htauth_user = variable_get('advagg_async_test_username', '');
+  $htauth_pass = variable_get('advagg_async_test_password', '');
   $headers = array(
     'Host' => $_SERVER['HTTP_HOST'],
     'Connection' => 'close',
   );
+  if ($htauth_user && $htauth_pass) {
+    $headers['Authorization'] = 'Basic ' . base64_encode($htauth_user . ':' . $htauth_pass);
+  }
 
   timer_start(__FUNCTION__ . 'local');
   $data_local = drupal_http_request($url, $headers);
@@ -240,6 +245,21 @@ function advagg_admin_settings_form() {
       ),
     )),
   );
+  $form['advagg_async_test'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Async Test HTTP Basic Credentials'),
+    '#collapsed' => TRUE,
+    '#collapsible' => TRUE,
+  );
+  $form['advagg_async_test']['advagg_async_test_username'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Username'),
+    '#default_value' => variable_get('advagg_async_test_username', ''),
+  );
+  $form['advagg_async_test']['advagg_async_test_password'] = array(
+    '#type' => 'password',
+    '#title' => t('Password'),
+  );
   $form['advagg_gzip_compression'] = array(
     '#type' => 'checkbox',
     '#title' => t('Gzip CSS/JS files'),
@@ -266,7 +286,7 @@ function advagg_admin_settings_form() {
       '#field_prefix' => '<div>' . t('You are using a private file system. You must serve aggregated files via a public folder.') . '</div>',
       '#title' => t('Use a different directory for storing advagg files'),
       '#default_value' => variable_get('advagg_custom_files_dir', ADVAGG_CUSTOM_FILES_DIR),
-      '#description' => check_plain(t('You need to create a publicly writable directory (same permissions as Drupals files folder).') . ' ' . $extra . ' ' . t('If you do not need this, you can put a space in this box.')),
+      '#description' => check_plain(t('You need to create a publicly writable directory (same permissions as Drupals files folder) and it needs to be relative to the Drupal index.php file.') . ' ' . $extra . ' ' . t('If you do not need this, you can put a space in this box.')),
       '#required' => TRUE,
     );
   }
@@ -451,6 +471,11 @@ function advagg_admin_settings_form_validate($form, &$form_state) {
  */
 function advagg_admin_settings_form_submit($form, &$form_state) {
   global $conf;
+
+  // Pull the old password if it wasn't changed by the user.
+  if (!empty($form_state['values']['advagg_async_test_username']) && empty($form_state['values']['advagg_async_test_password'])) {
+      $form_state['values']['advagg_async_test_password'] = variable_get('advagg_async_test_password', '');
+  }
 
   // Gzip & htaccess checks.
   list($css_path, $js_path) = advagg_get_root_files_dir();

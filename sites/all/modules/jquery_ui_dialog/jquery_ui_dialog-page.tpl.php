@@ -1,5 +1,5 @@
 <?php
-// $Id:$
+// $Id: jquery_ui_dialog-page.tpl.php,v 1.1.2.18 2010/07/10 08:05:55 eugenmayer Exp $
 
 # Copyright (c) 2010 KontextWork
 # Author: Eugen Mayer

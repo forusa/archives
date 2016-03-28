@@ -93,7 +93,7 @@ function advagg_js_compress_init() {
  */
 function advagg_js_compress_advagg_files_table($row, $checksum) {
   // IF the file has changed, test it's compressibility.
-  if ($row['filetype'] = 'js' && $checksum != $row['checksum']) {
+  if ($row['filetype'] === 'js' && $checksum !== $row['checksum']) {
     $files_to_test[] = array(
       'md5' => $row['filename_md5'],
       'filename' => $row['filename'],
@@ -175,6 +175,12 @@ function advagg_js_compress_advagg_js_inline_alter(&$contents) {
   }
   if ($compressor == 1) {
     $contents = jsmin($contents);
+
+    // Ensure that $contents ends with ; or }.
+    if (strpbrk(substr(trim($contents), -1), ';}') === FALSE) {
+      // ; or } not found, add in ; to the end of $contents.
+      $contents = trim($contents) . ';';
+    }
   }
 
   // If using a cache set it.
@@ -266,6 +272,12 @@ function advagg_js_compress_prep(&$contents, $files, $bundle_md5) {
         }
         elseif ($compressor == 1) {
           $contents = jsmin($contents);
+
+          // Ensure that $contents ends with ; or }.
+          if (strpbrk(substr(trim($contents), -1), ';}') === FALSE) {
+            // ; or } not found, add in ; to the end of $contents.
+            $contents = trim($contents) . ';';
+          }
         }
       }
       $url = url($file, array('absolute' => TRUE));
@@ -285,7 +297,7 @@ function advagg_js_compress_prep(&$contents, $files, $bundle_md5) {
 function advagg_js_compress_jsminplus(&$contents) {
   // Try to allocate enough time to run JSMin+.
   if (function_exists('set_time_limit')) {
-    @set_time_limit(240);
+    @set_time_limit(variable_get('advagg_set_time_limit', ADVAGG_SET_TIME_LIMIT));
   }
 
   // Only include jsminplus.inc if the JSMinPlus class doesn't exist.
@@ -305,6 +317,13 @@ function advagg_js_compress_jsminplus(&$contents) {
     if (!empty($error)) {
       throw new Exception($error);
     }
+
+    // Ensure that $contents ends with ; or }.
+    if (strpbrk(substr(trim($contents), -1), ';}') === FALSE) {
+      // ; or } not found, add in ; to the end of $contents.
+      $contents = trim($contents) . ';';
+    }
+
     // Get the JS string length after the compression operation.
     $after = strlen($contents);
   }

@@ -65,7 +65,7 @@ function _eminline_url($text, $format) {
   $callback = _eminline_curry('_eminline_url_parse_full_links', 2);
 
   // Match absolute URLs.
-  $text = preg_replace_callback("`(?<=[\s(>])((http://|https://)([a-zA-Z0-9@:%_+*~#?&=.,/;-\[\]]*[a-zA-Z0-9@:%_+*~#&=/;-\[\]]))(?=[.,?!\s)<])`i", $callback($format), $text);
+  $text = preg_replace_callback("`(?<=[\s(>])((http://|https://)([a-zA-Z0-9@:%_+*~#?&=.,/;\-\[\]]*[a-zA-Z0-9@:%_+*~#&=/;\-\[\]]))(?=[.,?!\s)<])`i", $callback($format), $text);
 
   return $text;
 }
