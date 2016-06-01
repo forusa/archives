@@ -199,7 +199,7 @@ dropdown.css is the dropdown css built into the Marinelli theme (for the primary
       <h2 class="splash-modal__title">#GiveRefugeesRest</h2>
       <p class="splash-modal__intro"><img src="http://forusa.org/sites/default/files/grr-paul-ryan-2016-06_450.jpg" width="450" height="253" class="splash-modal__image" /><br /><br />Anti-refugee and anti-Muslim rhetoric is out of control. Entire groups of human beings are being marginalized.<br /><br />This needs to stop immediately.</p>
       <p class="splash-modal__button-wrap"><a href="/giverefugeesrest" title="Visit #GiveRefugeesRest and act now" class="splash-modal__button">Act now to #GiveRefugeesRest</a></p>
-      <p class="splash-modal__footer"><strong>Tweet <a href="https://twitter.com/home?status=.%40SpeakerRyan%20%23EndIslamophobia">.@SpeakerRyan #EndIslamophobia</a></strong></p>
+      <p class="splash-modal__footer"><strong><a href="https://twitter.com/home?status=.%40SpeakerRyan%20%23EndIslamophobia">Tweet .@SpeakerRyan #EndIslamophobia</a></strong></p>
     </div>
   </div>
 <!-- POPUP -->

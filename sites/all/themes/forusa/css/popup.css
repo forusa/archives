@@ -36,7 +36,7 @@
 
 .splash-modal__image {
   display: block;
-  margin: 0 auto;
+  margin: 1em auto 0 auto;
   /*float: right;*/
   /*margin-left: 1em;*/
 }
