@@ -883,6 +883,11 @@ function boost_menu() {
  * is rendered.
  */
 function boost_form_alter(&$form, $form_state, $form_id) {
+  if (boost_is_cacheable($GLOBALS['_boost_path'])) {
+    $form['#immutable'] = TRUE;
+    drupal_add_js(drupal_get_path('module', 'boost') . '/boost.js');
+  }
+
   switch ($form_id) {
 
     // Alter Drupal's system performance settings form by hiding the default
@@ -2623,9 +2628,15 @@ function _boost_ob_handler() {
 function boost_get_content_type() {
   $headers = explode("content-type: ", strtolower(drupal_get_headers()));
   $types = array();
+
   foreach ($headers as $header) {
-    $types[] = array_shift(explode('; charset=', array_shift(explode('\n', $header))));
+    if (! empty($header)) {
+      list($header_first_line) = explode('\n', $header);
+      list($header_first_part) = explode('; charset=', $header_first_line);
+      $types[] = $header_first_part;
+    }
   }
+
   return array_filter($types);
 }
 
@@ -4681,9 +4692,13 @@ function boost_cache_css_js_files($buffer) {
     array_shift($css_files);
     foreach ($css_files as $key => $value) {
       // Extract css filename
-      $temp = explode(base_path(), array_pop(explode('//', array_pop(explode('href="', array_shift(explode('" />', $value)))))));
+      list($temp) = explode('" />', $value);
+      $temp = explode('href="', $temp);
+      $temp = explode('//', array_pop($temp));
+      $temp = explode(base_path(), array_pop($temp));
       array_shift($temp);
-      $css_files[$key] = array_shift(explode('"', array_shift(explode('?', implode('/', $temp)))));
+      list($temp) = explode('?', implode('/', $temp));
+      list($css_files[$key]) = explode('"', $temp);
     }
     _boost_copy_css_files($css_files);
   }
@@ -4692,9 +4707,14 @@ function boost_cache_css_js_files($buffer) {
     array_shift($js_files);
     foreach ($js_files as $key => $value) {
       // Extract javascript src filename; kill scripts with no src tag
-      $temp = explode(base_path(), array_pop(explode('//', array_pop(explode('src="', array_shift(explode('">', $value)))))));
+      list($temp) = explode('">', $value);
+      $temp = explode('src="', $temp);
+      $temp = explode('//', array_pop($temp));
+      $temp = explode(base_path(), array_pop($temp));
       array_shift($temp);
-      $js_files[$key] = array_shift(explode('type=', array_shift(explode('"', array_shift(explode('?', implode('/', $temp)))))));
+      list($temp) = explode('?', implode('/', $temp));
+      list($temp) = explode('"', $temp);
+      list($js_files[$key]) = explode('type=', $temp);
     }
     _boost_copy_js_files(array_filter($js_files));
   }

@@ -1366,6 +1366,10 @@ function boost_update_6120() {
   ini_set('max_execution_time', 10800); //3 Hours
   _boost_install_set_time_limit(0);
   $ret = array();
+
+  // Issue #1780860: Must truncate the table because it tends to be huge
+  $ret[] = update_sql('TRUNCATE {boost_cache_relationships}');
+
   // Add in hash_url & timestamp columns to boost_cache
   db_add_field($ret, 'boost_cache_relationships', 'hash_url', array(
         'description' => 'MD5 hash of url',
@@ -1441,6 +1445,9 @@ function boost_update_6122() {
  */
 function boost_update_6123() {
   $ret = array();
+
+  // Issue #1780860: Must truncate the table because it tends to be huge
+  $ret[] = update_sql('TRUNCATE {boost_cache_relationships}');
 
   // Add indexes
   db_add_index($ret, 'boost_cache_relationships', 'base_dir', array('base_dir'));
@@ -1531,6 +1538,9 @@ function boost_update_6127() {
  */
 function boost_update_6128() {
   $ret = array();
+
+  // Issue #1780860: Must truncate the table because it tends to be huge
+  $ret[] = update_sql('TRUNCATE {boost_cache_relationships}');
 
   db_drop_index($ret, 'boost_cache', 'page_id');
   db_change_field($ret, 'boost_cache', 'page_id', 'page_id', array(
