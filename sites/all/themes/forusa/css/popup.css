@@ -35,8 +35,10 @@
 }
 
 .splash-modal__image {
-  float: right;
-  margin-left: 1em;
+  display: block;
+  margin: 0 auto;
+  /*float: right;*/
+  /*margin-left: 1em;*/
 }
 
 .splash-modal__button-wrap {
