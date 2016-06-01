@@ -208,7 +208,7 @@ class views_handler_filter_term_node_tid extends views_handler_filter_many_to_on
     return $rc;
   }
 
-  function exposed_validate($form, &$form_state) {
+  function exposed_validate(&$form, &$form_state) {
     if (empty($this->options['exposed'])) {
       return;
     }

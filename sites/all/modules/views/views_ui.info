@@ -4,9 +4,8 @@ package = Views
 core = 6.x
 dependencies[] = views
 
-; Information added by drupal.org packaging script on 2013-10-19
-version = "6.x-2.16+6-dev"
+; Information added by Drupal 6 LTS vendors on 2016-04-20
+version = "6.x-2.19"
 core = "6.x"
 project = "views"
-datestamp = "1382152075"
-
+datestamp = "1461155213"

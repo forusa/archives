@@ -325,7 +325,7 @@ class views_handler extends views_object {
   /**
    * Validate the exposed filter form
    */
-  function exposed_validate($form, &$form_state) { }
+  function exposed_validate(&$form, &$form_state) { }
 
   /**
    * Submit the exposed filter form
