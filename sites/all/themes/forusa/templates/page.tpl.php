@@ -34,7 +34,33 @@ if ($_GET["format"] == "simple") {
     <link rel="stylesheet" type="text/css" href="<?php print base_path(). path_to_theme(); ?>/css/ie7.css" />
 <![endif]-->
 
+  <!-- POPUP -->
+  <link rel="stylesheet" type="text/css" href="<?php print base_path(). path_to_theme(); ?>/css/colorbox.css" />
+  <link rel="stylesheet" type="text/css" href="<?php print base_path(). path_to_theme(); ?>/css/popup.css" />
+  <!-- POPUP -->
+
   <?php print $scripts ?>
+
+  <!-- POPUP -->
+  <script language="javascript" src="<?php print base_path(). path_to_theme(); ?>/js/colorbox.js"></script>
+  <script>
+
+    $("document").ready(function (){
+
+       // load the overlay
+
+       if (document.cookie.indexOf('grr_overlay_seen=true') == -1) {
+        // var expireOn = 1000*60*60*1; // last value is the number of hours
+        var expireOn = 1000*60*60*24*1; // last value is the number of days
+        var expires = new Date((new Date()).valueOf() + expireOn);
+        document.cookie = "grr_overlay_seen=true;expires=" + expires.toUTCString();
+        $.colorbox({width:"580px", inline:true, href:"#splash-modal"});
+      }
+
+      $(".open_popup").colorbox({width:"580px", inline:true, href:"#splash-modal"});
+    });
+  </script>
+  <!-- POPUP -->
 
 </head>
 
@@ -167,6 +193,17 @@ dropdown.css is the dropdown css built into the Marinelli theme (for the primary
 <?php print $footer_message ?>
 </div>
 <?php print $closure ?>
+
+<!-- POPUP -->
+  <div style="display:none">
+    <div id="splash-modal">
+      <h2 class="splash-modal__title">#EndIslamophobia</h2>
+      <p class="splash-modal__intro"><img src="http://forusa.org/sites/default/files/imagecache/450px-width/images/blogs/inline/20160603-paul-ryan-supports-campaign-stop-islamophobia-while-backing-trumps-hate-fuelled-bid-for-president.jpg" width="450" height="300" class="splash-modal__image" /><br /><br />Speaker of the House Paul Ryan supports a campaign to stop Islamophobia while backing Trump's hate-fueled bid for president.</p>
+      <p class="splash-modal__button-wrap"><a href="/blogs/for/paul-ryan-supports-campaign-stop-islamophobia-while-backing-trumps-hate-fueled-bid-for" title="Learn more about the campaign and his statements" class="splash-modal__button">Learn more</a></p>
+      <!-- <p class="splash-modal__footer"><strong><a href="https://twitter.com/home?status=.%40SpeakerRyan%20%23EndIslamophobia">Tweet .@SpeakerRyan #EndIslamophobia</a></strong></p> -->
+    </div>
+  </div>
+<!-- POPUP -->
 
 </body>
 </html>
