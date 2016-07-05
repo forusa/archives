@@ -155,3 +155,76 @@ DirectoryIndex index.php
 </IfModule>
 
 # $Id$
+
+###
+### REDIRECTS TO NEW WEBSITE ###
+###
+
+Redirect 301 /about/staff http://forusa.org/who-we-are/staff.php
+Redirect 301 /about/staff http://forusa.org/who-we-are/staff.php
+Redirect 301 /about/national-council http://forusa.org/who-we-are/national-council.php
+Redirect 301 /get-involved http://forusa.org/who-we-are/chapters-and-affiliates.php
+Redirect 301 /groups/local-chapters http://forusa.org/who-we-are/chapters-and-affiliates.php
+Redirect 301 /groups/religious-peace-fellowships http://forusa.org/who-we-are/chapters-and-affiliates.php
+Redirect 301 /groups/affiliate-groups http://forusa.org/who-we-are/chapters-and-affiliates.php
+Redirect 301 /about http://forusa.org/what-we-do.php
+Redirect 301 /about/history http://forusa.org/what-we-do.php
+Redirect 301 /about/awards http://forusa.org/what-we-do.php
+Redirect 301 /donate http://forusa.org/donate.php
+Redirect 301 /store http://forusa.org/store.php
+Redirect 301 /contact http://forusa.org/contact.php
+Redirect 301 /join http://forusa.org/join.php
+Redirect 301 /about/sop http://forusa.org/join.php
+Redirect 301 /about/annual-reports http://forusa.org/annual-reports.php
+Redirect 301 /about/990s http://forusa.org/form-990s.php
+Redirect 301 /blogs/for/rebel-passion-eighty-five-years-fellowship-reconciliation/6728 http://forusa.org/richard-deats-the-rebel-passion.php
+Redirect 301 /nonviolence/63deats.html http://forusa.org/richard-deats-the-rebel-passion.php
+Redirect 301 /about/shadowcliff http://forusa.org/shadowcliff-headquarters.php
+Redirect 301 /about/directions http://forusa.org/shadowcliff-headquarters.php
+Redirect 301 /store/books http://forusa.org/products/books-and-pamphlets.php
+Redirect 301 /store/greetingcards http://forusa.org/products/greeting-cards.php
+Redirect 301 /store/postcards http://forusa.org/products/postcards.php
+Redirect 301 /store/av http://forusa.org/products/music-and-films.php
+Redirect 301 /store/gifts http://forusa.org/products/gifts.php
+Redirect 301 /blog http://forusa.org/blog.php
+Redirect 301 /content/us-militarization-middle-east http://forusa.org/blog.php%3Fi=37
+Redirect 301 /blogs/ethan-vesely-flad/martin-luther-king-egypt-fellowship-reconciliation/8479 http://forusa.org/blog.php%3Fi=21
+Redirect 301 /blogs/for/why-ferguson-matters-faith-communities/13072 http://forusa.org/blog.php%3Fi=36
+Redirect 301 /fellowship/2014/winter/interfaith-partnership-where-it-really-matters/13119 http://forusa.org/blog.php%3Fi=38
+Redirect 301 /blogs/linda-kelly/reclaimmlk-new-song-rev-sekou/13311 http://forusa.org/blog.php%3Fi=32
+Redirect 301 /blogs/for/for-young-adults-farm-land-grow-spirit/13313 http://forusa.org/blog.php%3Fi=33
+Redirect 301 /blogs/keiller-macduff/may-justice-prevail-rev-sekous-trial-for-praying-ferguson/13329 http://forusa.org/blog.php%3Fi=34
+Redirect 301 /blogs/ethan-vesely-flad/washington-listening-giverefugeesrest/13331 http://forusa.org/blog.php%3Fi=35
+Redirect 301 /blogs/kathy-kelly/voices-for-creative-nonviolence-activists-enter-drone-base-loaf-bread/13338 http://forusa.org/blog.php%3Fi=25
+Redirect 301 /blogs/dr-hakim/how-many-global-crises-can-15-year-old-afghan-take-including-water-crisis/13339 http://forusa.org/blog.php%3Fi=26
+Redirect 301 /blogs/ifor/open-letter-un-end-korean-war/13343 http://forusa.org/blog.php%3Fi=20
+Redirect 301 /blogs/ethan-vesely-flad/invitation-organizing-international-for-featuring-rev-lucas-johnson/13344 http://forusa.org/blog.php%3Fi=19
+Redirect 301 /blogs/rene-wadlow/how-can-we-continue-stand-solidarity-nonviolent-action-syria/13347 http://forusa.org/blog.php%3Fi=18
+Redirect 301 /blogs/linda-kelly/video-persevering-for-peace-for/13346 http://forusa.org/blog.php%3Fi=17
+Redirect 301 /blogs/anthony-grimes/virtue-ethics-toward-more-humanizing-ethics-us-justice-system/13350 http://forusa.org/blog.php%3Fi=27
+Redirect 301 /blogs/kristin-stoneking/compassion-not-criminalization-faith-response-addiction-drug-policy/13352 http://forusa.org/blog.php%3Fi=28
+Redirect 301 /blogs/anthony-grimes/honor-my-father-stoptheharm/13353 http://forusa.org/blog.php%3Fi=29
+Redirect 301 /blogs/kristin-stoneking/coming-out-love-for-united-methodist-church/13364 http://forusa.org/blog.php%3Fi=31
+Redirect 301 /blogs/ethan-vesely-flad/daniel-berrigan-presente-personal-reflection-family-faith-action/13363 http://forusa.org/blog.php%3Fi=30
+Redirect 301 /blogs/kristin-stoneking/join-us-urging-speaker-ryan-help-endislamophobia/13375 http://forusa.org/blog.php%3Fi=42
+Redirect 301 /blogs/kristin-stoneking/trump-endorsement-paul-ryan-risks-gaining-world-losing-his-soul/13379 http://forusa.org/blog.php%3Fi=43
+Redirect 301 /blogs/la-trina-jackson/ramadan-kareem-rmdn-krym/13380 http://forusa.org/blog.php%3Fi=44
+Redirect 301 /blogs/richard-lapchick/remembering-my-friend-muhammad-ali/13381 http://forusa.org/blog.php%3Fi=45
+Redirect 301 /blogs/kathy-kelly/de-incarceration-different-drum-so-needed/13382 http://forusa.org/blog.php%3Fi=46
+Redirect 301 /blogs/gretchen-honnold/building-faith-based-nonviolence-ferguson-nationwide/13384 http://forusa.org/blog.php%3Fi=47
+Redirect 301 /blogs/abdur-rauf-campos-marquetti/our-deepest-prayers-condolences-victims-families-those-slain http://forusa.org/blog.php%3Fi=48
+Redirect 301 /blogs/kristin-stoneking/orlando-united-against-hate-crimes/13387 http://forusa.org/blog.php%3Fi=49
+Redirect 301 /blogs/for/truth-worst-amending-our-orlando-statement/13389 http://forusa.org/blog.php%3Fi=50
+Redirect 301 /blogs/kathy-kelly/why-go-russia/13391 http://forusa.org/blog.php%3Fi=51
+Redirect 301 /blogs/lucas-johnson/orlando-complexity-human-existence-grief/13392 http://forusa.org/blog.php%3Fi=52
+Redirect 301 /blogs/meredith-nicolich/our-2016-peace-awards/13390 http://forusa.org/blog.php%3Fi=53
+Redirect 301 /blogs/la-trina-jackson/ramadan-kareem-rmdn-krym/13380 http://forusa.org/blog.php%3Fi=44
+Redirect 301 /blogs/richard-lapchick/remembering-my-friend-muhammad-ali/13381 http://forusa.org/blog.php%3Fi=45
+Redirect 301 /blogs/kathy-kelly/de-incarceration-different-drum-so-needed/13382 http://forusa.org/blog.php%3Fi=46
+Redirect 301 /blogs/gretchen-honnold/building-faith-based-nonviolence-ferguson-nationwide/13384 http://forusa.org/blog.php%3Fi=47
+Redirect 301 /blogs/abdur-rauf-campos-marquetti/our-deepest-prayers-condolences-victims-families-those-slain http://forusa.org/blog.php%3Fi=48
+Redirect 301 /blogs/kristin-stoneking/orlando-united-against-hate-crimes/13387 http://forusa.org/blog.php%3Fi=49
+Redirect 301 /blogs/for/truth-worst-amending-our-orlando-statement/13389 http://forusa.org/blog.php%3Fi=50
+Redirect 301 /blogs/kathy-kelly/why-go-russia/13391 http://forusa.org/blog.php%3Fi=51
+Redirect 301 /blogs/lucas-johnson/orlando-complexity-human-existence-grief/13392 http://forusa.org/blog.php%3Fi=52
+Redirect 301 /blogs/meredith-nicolich/our-2016-peace-awards/13390 http://forusa.org/blog.php%3Fi=53
