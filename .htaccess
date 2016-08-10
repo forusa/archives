@@ -186,7 +186,6 @@ Redirect 301 /store/greetingcards http://forusa.org/products/greeting-cards.php
 Redirect 301 /store/postcards http://forusa.org/products/postcards.php
 Redirect 301 /store/av http://forusa.org/products/music-and-films.php
 Redirect 301 /store/gifts http://forusa.org/products/gifts.php
-Redirect 301 /blog http://forusa.org/blog.php
 Redirect 301 /content/us-militarization-middle-east http://forusa.org/blog.php%3Fi=37
 Redirect 301 /blogs/ethan-vesely-flad/martin-luther-king-egypt-fellowship-reconciliation/8479 http://forusa.org/blog.php%3Fi=21
 Redirect 301 /blogs/for/why-ferguson-matters-faith-communities/13072 http://forusa.org/blog.php%3Fi=36
