@@ -371,13 +371,19 @@ function template_preprocess_views_data_export_xml_body(&$vars) {
 
   foreach ($vars['themed_rows'] as $num => $row) {
     foreach ($row as $field => $content) {
-      // Prevent double encoding of the ampersand. Look for the entities produced by check_plain().
-      $content = preg_replace('/&(?!(amp|quot|#039|lt|gt);)/', '&amp;', $content);
-      // Convert < and > to HTML entities.
-      $content = str_replace(
-        array('<', '>'),
-        array('&lt;', '&gt;'),
-        $content);
+      if (empty($vars['options']['cdata_wrapper'][$field])) {
+        // Prevent double encoding of the ampersand. Look for the entities produced by check_plain().
+        $content = preg_replace('/&(?!(amp|quot|#039|lt|gt);)/', '&amp;', $content);
+        // Convert < and > to HTML entities.
+        $content = str_replace(
+          array('<', '>'),
+          array('&lt;', '&gt;'),
+          $content);
+      }
+      else {
+        // Escape CDATA end sequence only.
+        $content = '<![CDATA[' . str_replace(']]>', ']]]]><![CDATA[>', $content) . ']]>';
+      }
       $vars['themed_rows'][$num][$field] = $content;
     }
   }

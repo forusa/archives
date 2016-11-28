@@ -31,6 +31,36 @@ function views_data_export_views_api() {
 }
 
 /**
+ * Implements hook_file_download().
+ */
+function views_data_export_file_download($filepath) {
+  if (views_data_export_is_export_file($filepath)) {
+    $result = -1;
+    // Allow only owners to access export files.
+    $file = db_fetch_object(db_query("SELECT * FROM {files} WHERE filepath = '%s'", array('%s' => $filepath)));
+    if ($file && $file->uid == $GLOBALS['user']->uid) {
+      // This is only necessary for file_download_headers() to return a result
+      // evaluating to TRUE, in case no other module added any header.
+      $result = array('X-Drupal-ViewsDataExport' => 1);
+    }
+    return $result;
+  }
+}
+
+/**
+ * Checks whether the passed URI identifies an export file.
+ *
+ * @param string $filepath
+ *   A filepath.
+ *
+ * @return bool
+ *   TRUE if the filepath identifies an export file, FALSE otherwise.
+ */
+function views_data_export_is_export_file($filepath) {
+  return strpos($filepath, file_directory_temp() . '/views_plugin_display') === 0;
+}
+
+/**
  * Implementation of hook_theme().
  */
 function views_data_export_theme() {
