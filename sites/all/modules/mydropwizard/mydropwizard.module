@@ -172,6 +172,16 @@ function mydropwizard_menu() {
 }
 
 /**
+ * Implements hook_menu_alter().
+ */
+function mydropwizard_menu_alter(&$items) {
+  // Support for the Acquia Connector.
+  if ($items['admin/reports/updates/check']['page callback'] == 'acquia_agent_manual_status') {
+    $items['admin/reports/updates/check']['page callback'] = 'mydropwizard_acquia_agent_manual_status';
+  }
+}
+
+/**
  * Implementation of the hook_theme() registry.
  */
 function mydropwizard_theme() {

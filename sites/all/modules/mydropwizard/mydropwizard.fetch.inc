@@ -19,6 +19,15 @@ function mydropwizard_manual_status() {
 }
 
 /**
+ * Alternate callback for use with the Acquia Connector.
+ */
+function mydropwizard_acquia_agent_manual_status() {
+  // Copied from acquia_agent_manual_status().
+  acquia_agent_check_subscription();
+  mydropwizard_manual_status();
+}
+
+/**
  * Fetch project info via XML from a central server.
  */
 function _mydropwizard_refresh() {
@@ -62,16 +71,24 @@ function _mydropwizard_refresh() {
     }
   }
   $statistics_url = variable_get('mydropwizard_statistics_url', MYDROPWIZARD_STATISTICS_URL);
-  $response = drupal_http_request($statistics_url, array('Content-type' => 'application/json'), 'POST', drupal_to_js(array(
+  $statistics_data = drupal_to_js(array(
     'site_key' => $site_key,
     'projects' => $project_versions,
     'mydropwizard_key' => variable_get('mydropwizard_customer_key', ''),
-  )));
+  ));
+  if (variable_get('mydropwizard_http_post_disabled', FALSE)) {
+    // This is a hack for a customer site that seemingly can't do HTTP POST
+    // for mysterious reasons. I don't like it, but it works.
+    $response = drupal_http_request($statistics_url . '?data=' . base64_encode($statistics_data));
+  }
+  else {
+    $response = drupal_http_request($statistics_url, array('Content-type' => 'application/json'), 'POST', $statistics_data);
+  }
   $update_status = $response->data;
   variable_set('mydropwizard_update_status', $update_status);
 
   // If the server says we're good, then pull the individual status for each project.
-  if ($update_status == 'OK') {
+  if ($update_status == 'OK' || variable_get('mydropwizard_ignore_statistics_errors', FALSE)) {
     foreach ($projects as $key => $project) {
       $url = _mydropwizard_build_fetch_url($project, $site_key);
       $fetch_url_base = _mydropwizard_get_fetch_url_base($project);
