@@ -441,7 +441,10 @@ function advagg_bundler_get_css_selector_count($files) {
   $result  = db_query("SELECT filename, selector_count, timestamp FROM {advagg_bundler_selector_count} WHERE filename IN ($placeholders)", $files);
 
   while ($row = db_fetch_array($result)) {
-    $modified = filemtime($row['filename']);
+    $modified = 0;
+    if (is_readable($row['filename'])) {
+      $modified = filemtime($row['filename']);
+    }
     if ($modified > $row['timestamp']) {
       $css = advagg_build_css_bundle(array($row['filename']), TRUE);
 

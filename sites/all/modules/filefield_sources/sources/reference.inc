@@ -169,7 +169,9 @@ function filefield_source_reference_autocomplete($type_name, $field_name, $filen
   if (!empty($field)) {
     $files = filefield_source_reference_get_files($filename, $field);
     foreach ($files as $fid => $file) {
-      $items[$file->filename ." [fid:$fid]"] = theme('filefield_source_reference_autocomplete_item', $file);
+      if (filefield_sources_file_access($file->filepath)) {
+        $items[$file->filename . " [fid:$fid]"] = theme('filefield_source_reference_autocomplete_item', $file);
+      }
     }
   }
 

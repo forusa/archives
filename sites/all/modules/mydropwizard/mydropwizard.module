@@ -624,6 +624,9 @@ function _mydropwizard_project_status_sort($a, $b) {
  *     the given time, after which it will be invalidated.
  */
 function _mydropwizard_cache_set($cid, $data, $expire) {
+  if (!db_table_exists('cache_mydropwizard')) {
+    return;
+  }
   $serialized = 0;
   if (is_object($data) || is_array($data)) {
     $data = serialize($data);
@@ -645,6 +648,10 @@ function _mydropwizard_cache_set($cid, $data, $expire) {
  *   The data for the given cache ID, or NULL if the ID was not found.
  */
 function _mydropwizard_cache_get($cid) {
+  if (!db_table_exists('cache_mydropwizard')) {
+    return FALSE;
+  }
+
   $cache = db_fetch_object(db_query("SELECT data, created, expire, serialized FROM {cache_mydropwizard} WHERE cid = '%s'", $cid));
   if (isset($cache->data)) {
     $cache->data = db_decode_blob($cache->data);
@@ -663,6 +670,9 @@ function _mydropwizard_cache_get($cid) {
  *   cache. If empty, all records will be cleared from the table.
  */
 function _mydropwizard_cache_clear($cid = NULL) {
+  if (!db_table_exists('cache_mydropwizard')) {
+    return;
+  }
   if (empty($cid)) {
     db_query("TRUNCATE TABLE {cache_mydropwizard}");
   }

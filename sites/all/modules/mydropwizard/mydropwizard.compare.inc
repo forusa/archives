@@ -162,6 +162,12 @@ function mydropwizard_get_project_name($file) {
     // so we must hard-code a list here.
     $project_name = 'drupal';
   }
+  else {
+    // Guess that the module name is the project name. Note: this is wrong
+    // quite frequently, but it helps fix problems with some -dev versions of
+    // modules -- see issue #2845390.
+    $project_name = $file->name;
+  }
   return $project_name;
 }
 

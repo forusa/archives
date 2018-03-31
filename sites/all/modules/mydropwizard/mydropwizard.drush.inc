@@ -55,7 +55,8 @@ function _drush_mydropwizard_return_table($data) {
 }
 
 function drush_mydropwizard_list_projects() {
-  module_load_include('inc', 'mydropwizard', 'mydropwizard.compare');
+  require_once 'mydropwizard.module';
+  require_once 'mydropwizard.compare.inc';
   $available_projects = mydropwizard_get_projects();
 
   $data = array();

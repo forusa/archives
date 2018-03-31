@@ -4,9 +4,8 @@ dependencies[] = filefield
 package = CCK
 core = 6.x
 
-; Information added by Drupal.org packaging script on 2013-12-28
-version = "6.x-1.10"
+; Information added by Drupal 6 LTS vendors on 2018-02-07
+version = "6.x-1.11"
 core = "6.x"
 project = "filefield_sources"
-datestamp = "1388255005"
-
+datestamp = "1518033105"

@@ -1,5 +1,4 @@
 <?php
-// $Id: site_verify.module,v 1.10.2.1 2011/02/20 22:38:43 davereid Exp $
 
 /**
  * Implements hook_menu().
@@ -60,6 +59,13 @@ function site_verify_menu() {
   }
 
   return $items;
+}
+
+/**
+ * Implements hook_perm().
+ */
+function site_verify_perm() {
+  return array('administer site verify uploads');
 }
 
 /**

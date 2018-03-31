@@ -131,7 +131,7 @@ function theme_views_slideshow_singleframe_no_display_section($view, $rows, $vss
   foreach ($rows as $count => $item) {
     $items[] = $item;
     if (count($items) == $items_per_slide || $count == (count($rows)-1)) {
-      $output .= theme('views_slideshow_singleframe_no_display_teaser', $items, $vss_id, $slideshow_count);
+      $output .= theme('views_slideshow_singleframe_no_display_teaser', $items, $vss_id, $slideshow_count, count($rows));
       $items = array();
       $slideshow_count++;
     }
@@ -146,7 +146,7 @@ function theme_views_slideshow_singleframe_no_display_section($view, $rows, $vss
  *
  * @ingroup themeable
  */
-function theme_views_slideshow_singleframe_no_display_teaser($items, $vss_id, $count) {
+function theme_views_slideshow_singleframe_no_display_teaser($items, $vss_id, $count, $length) {
   $current = $count + 1;
   $classes = array(
     'views_slideshow_singleframe_slide',
@@ -163,15 +163,13 @@ function theme_views_slideshow_singleframe_no_display_teaser($items, $vss_id, $c
 
   $output = "<div$attributes>";
   foreach ($items as $item_count => $item) {
-    $item_class = 'views-row views-row-' . $item_count;
-    if (!$item_count) {
+    $item_class = 'views-row views-row-' . $count;
+    $item_class .= ($count % 2) ? ' views-row-even' : ' views-row-odd';
+    if ($count == 0) {
       $item_class .= ' views-row-first';
     }
-    if ($item_count % 2) {
-      $item_class .= ' views-row-even';
-    }
-    else {
-      $item_class .= ' views-row-odd';
+    elseif ($count == $length - 1) {
+      $item_class .= ' views-row-last';
     }
     $output .= '<div class="' . $item_class . '">' . "\n";
     $output .= $item . "\n";

@@ -197,7 +197,7 @@ function theme_views_slideshow_thumbnailhover_breakout_teasers($view, $items, $v
   if ('title' == $options['views_slideshow_thumbnailhover']['hover_breakout']) {
     foreach ($view->result as $count => $node) {
       $node = node_load($node->nid); // TODO, this loads too much, but on node row we dont access the fields separately.
-      $output .= theme('views_slideshow_thumbnailhover_breakout_teaser', $node->title, $vss_id, $count);
+      $output .= theme('views_slideshow_thumbnailhover_breakout_teaser', $node->title, $vss_id, $count, count($items));
     }
   }
   elseif ($view->display_handler->uses_fields()) {
@@ -217,12 +217,12 @@ function theme_views_slideshow_thumbnailhover_breakout_teasers($view, $items, $v
           $rendered_fields .= '</div>';
         }
       }
-      $output .= theme('views_slideshow_thumbnailhover_breakout_teaser', $rendered_fields, $vss_id, $count);
+      $output .= theme('views_slideshow_thumbnailhover_breakout_teaser', $rendered_fields, $vss_id, $count, count($items));
     }
   }
   else {
     foreach ($items as $count => $item) {
-      $output .= theme('views_slideshow_thumbnailhover_breakout_teaser', $item, $vss_id, $count);
+      $output .= theme('views_slideshow_thumbnailhover_breakout_teaser', $item, $vss_id, $count, count($items));
     }
   }
   $output .= "</div>\n";
@@ -235,15 +235,18 @@ function theme_views_slideshow_thumbnailhover_breakout_teasers($view, $items, $v
  *
  * @ingroup themeable
  */
-function theme_views_slideshow_thumbnailhover_breakout_teaser($item, $vss_id, $count) {
+function theme_views_slideshow_thumbnailhover_breakout_teaser($item, $vss_id, $count, $length) {
   $current = $count + 1;
   $classes = array(
     'views_slideshow_thumbnailhover_div_breakout_teaser',
   );
-  if (!$count) {
-    $classes[] = 'views_slideshow_thumbnailhover_active_teaser';
-  }
   $classes[] = ($count % 2) ? 'views-row-even' : 'views-row-odd';
+  if ($count == 0) {
+    $classes[] = 'views_slideshow_thumbnailhover_active_teaser views-row-first';
+  }
+  elseif ($count == $length - 1) {
+    $classes[] = ' views-row-last';
+  }
 
   $attributes['class'] = implode(' ', $classes);
   $attributes['id'] = "views_slideshow_thumbnailhover_div_breakout_teaser_" . $vss_id . "_" . $count;

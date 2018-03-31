@@ -1,5 +1,4 @@
 <?php
-// $Id: site_verify.admin.inc,v 1.14.2.3 2011/02/20 22:38:43 davereid Exp $
 
 function site_verify_list() {
   $engines = site_verify_get_engines();
@@ -101,32 +100,35 @@ function site_verify_edit_form(&$form_state, $record = array(), $engine = NULL) 
         '#default_value' => $record['meta'],
         '#description' => t('This is the full meta tag provided for verification. Note that this meta tag will only be visible in the source code of your <a href="@frontpage">front page</a>.', array('@front-page' => url('<front>'))),
         '#element_validate' => $record['engine']['meta_validate'],
-        '#access' => $record['engine']['meta'],
+        '#access' => $record['engine']['meta'] && class_exists('DOMDocument'),
         '#maxlength' => NULL,
       );
 
-      $form['file_upload'] = array(
-        '#type' => 'file',
-        '#title' => t('Upload an existing verification file'),
-        '#description' => t('If you have been provided with an actual file, you can simply upload the file.'),
-        '#access' => $record['engine']['file'],
-      );
-      $form['file'] = array(
-        '#type' => 'textfield',
-        '#title' => t('Verification file'),
-        '#default_value' => $record['file'],
-        '#description' => t('The name of the HTML verification file you were asked to upload.'),
-        '#element_validate' => $record['engine']['file_validate'],
-        '#access' => $record['engine']['file'],
-      );
-      $form['file_contents'] = array(
-        '#type' => 'textarea',
-        '#title' => t('Verification file contents'),
-        '#default_value' => $record['file_contents'],
-        '#element_validate' => $record['engine']['file_contents_validate'],
-        '#wysiwyg' => FALSE,
-        '#access' => $record['engine']['file_contents'],
-      );
+      if (user_access('administer site verify uploads')) {
+        $form['file_upload'] = array(
+          '#type' => 'file',
+          '#title' => t('Upload an existing verification file'),
+          '#description' => t('If you have been provided with an actual file, you can simply upload the file.'),
+          '#access' => $record['engine']['file'],
+        );
+        $form['file'] = array(
+          '#type' => 'textfield',
+          '#title' => t('Verification file'),
+          '#default_value' => $record['file'],
+          '#description' => t('The name of the HTML verification file you were asked to upload.'),
+          '#element_validate' => $record['engine']['file_validate'],
+          '#access' => $record['engine']['file'],
+        );
+        $form['file_contents'] = array(
+          '#type' => 'textarea',
+          '#title' => t('Verification file contents'),
+          '#default_value' => $record['file_contents'],
+          '#element_validate' => $record['engine']['file_contents_validate'],
+          '#wysiwyg' => FALSE,
+          '#access' => $record['engine']['file_contents'],
+        );
+      }
+
       if (!variable_get('clean_url', 0)) {
         drupal_set_message(t('Using verification files will not work if <a href="@clean-urls">clean URLs</a> are disabled.', array('@clean-urls' => url('admin/settings/clean-url'))), 'error', FALSE);
         $form['file']['#disabled'] = TRUE;
@@ -134,8 +136,8 @@ function site_verify_edit_form(&$form_state, $record = array(), $engine = NULL) 
         $form['file_upload']['#disabled'] = TRUE;
       }
 
+      //@TODO: $record['engine']['file'] is always TRUE
       if ($record['engine']['file']) {
-        $form['#validate'][] = 'site_verify_validate_file';
         $form['#attributes'] = array('enctype' => 'multipart/form-data');
       }
 
@@ -156,29 +158,57 @@ function site_verify_edit_form(&$form_state, $record = array(), $engine = NULL) 
 }
 
 /**
- * Validation callback; save the uploaded file and check file name uniqueness.
+ * Validation callback; sanitize metatag and save the uploaded file
  */
-function site_verify_validate_file(&$form, &$form_state) {
-  $values = &$form_state['values'];
+function site_verify_edit_form_validate($form, &$form_state) {
+  if ($form_state['storage']['step']) {
+    // validate metatag
+    if (isset($form_state['values']['meta']) && $form_state['values']['meta']) {
+      $valid_metatag_set = FALSE;
 
-  // Import the uploaded verification file.
-  if ($file = file_save_upload('file_upload', array(), FALSE, FILE_EXISTS_REPLACE)) {
-    $contents = @file_get_contents($file->filepath);
-    file_delete($file->filepath);
-    if ($contents === FALSE) {
-      drupal_set_message(t('The verification file import failed, because the file %filename could not be read.', array('%filename' => $file->filename)), 'error');
+      $html = $form_state['values']['meta'];
+      $dom = new DOMDocument;
+      $dom->loadHTML($html);
+      //@TODO: If we only care about the first metatag... why foreach?  why not [0]?
+      foreach ($dom->getElementsByTagName('meta') as $tag) {
+        if ($tag->getAttribute('name') && $tag->getAttribute('content')) {
+          $form_state['values']['meta'] = '<meta name="' . $tag->getAttribute('name') . '" content="' . $tag->getAttribute('content') . '" />';
+          $valid_metatag_set = TRUE;
+        }
+      }
+
+      if (!$valid_metatag_set) {
+        form_set_error('meta', t('A valid metatag was not found'));
+      }
+    }
+
+    //
+    $values = &$form_state['values'];
+    // Import the uploaded verification file.
+    $validators = array('file_validate_extensions' => array(''));
+    if ($file = file_save_upload('file_upload', $validators, FALSE, FILE_EXISTS_REPLACE)) {
+      $contents = @file_get_contents($file->filepath);
+      file_delete($file->filepath);
+      if ($contents === FALSE) {
+        drupal_set_message(t('The verification file import failed, because the file %filename could not be read.', array('%filename' => $file->filename)), 'error');
+      }
+      else {
+        $values['file'] = $file->filename;
+        $values['file_contents'] = $contents;
+        //drupal_set_message(t('The verification file <a href="@filename">@filename</a> was successfully imported.', array('@filename' => $file->filename)));
+      }
+    }
+
+    // Confirm that the desired filename isn't already in use by another
+    // verification.
+    if ($values['file']) {
+      $existing_file = db_result(db_query("SELECT svid FROM {site_verify} WHERE LOWER(file) = LOWER('%s') AND svid <> %d", $values['file'], $values['svid']));
+      if ($existing_file) {
+        form_set_error('file', t('The file %filename is already being used in another verification.', array('%filename' => $values['file'])));
+      }
     }
     else {
-      $values['file'] = $file->filename;
-      $values['file_contents'] = $contents;
-      //drupal_set_message(t('The verification file <a href="@filename">@filename</a> was successfully imported.', array('@filename' => $file->filename)));
-    }
-  }
-
-  if ($values['file']) {
-    $existing_file = db_result(db_query("SELECT svid FROM {site_verify} WHERE LOWER(file) = LOWER('%s') AND svid <> %d", $values['file'], $values['svid']));
-    if ($existing_file) {
-      form_set_error('file', t('The file %filename is already being used in another verification.', array('%filename' => $values['file'])));
+      $form_state['values']['file_contents'] = NULL;
     }
   }
 }
